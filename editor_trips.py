@@ -20,14 +20,20 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 # --- Git helpers ---
 def run_git(args: list[str], cwd: str) -> tuple[int, str, str]:
-    """Run a git command and return (returncode, stdout, stderr)."""
+    """Run a git command and return (returncode, stdout, stderr). Non-interactive (won't prompt)."""
+    env = os.environ.copy()
+    # Prevent git from prompting for credentials/passphrases in a GUI-less subprocess.
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    # Force ssh to be non-interactive; if a passphrase is needed, it will fail quickly.
+    env["GIT_SSH_COMMAND"] = "ssh -o BatchMode=yes"
     p = subprocess.run(
         ["git", *args],
         cwd=cwd,
         capture_output=True,
-        text=True
+        text=True,
+        env=env
     )
-    return p.returncode, p.stdout.strip(), p.stderr.strip()
+    return p.returncode, (p.stdout or "").strip(), (p.stderr or "").strip()
 
 
 
@@ -357,10 +363,34 @@ class TripsEditorApp(tk.Tk):
                 return
 
             # Other push errors
+            details = (err or out).strip()
+            low = (out + "\n" + err).lower()
+
+            if ("permission denied" in low) or ("publickey" in low) or ("could not read from remote repository" in low) or ("host key verification failed" in low) or ("batchmode" in low):
+                messagebox.showerror(
+                    "GitHub",
+                    "Falha de autenticação SSH ao publicar.\n\n"
+                    f"{details}\n\n"
+                    "Como corrigir (no Terminal):\n"
+                    "1) Teste:  ssh -T git@github.com\n"
+                    "2) Carregue a chave no agente (macOS):\n"
+                    "   eval \"$(ssh-agent -s)\"\n"
+                    "   ssh-add --apple-use-keychain ~/.ssh/id_ed25519\n"
+                    "3) Confirme: ssh-add -l\n"
+                    "4) Tente novamente o push.\n\n"
+                    "Se sua rede bloquear a porta 22, configure GitHub via 443 em ~/.ssh/config:\n"
+                    "Host github.com\n"
+                    "  HostName ssh.github.com\n"
+                    "  User git\n"
+                    "  Port 443\n"
+                    "  IdentityFile ~/.ssh/id_ed25519\n"
+                )
+                return
+
             messagebox.showerror(
                 "GitHub",
                 "Falha no git push.\n\n"
-                f"{err or out}\n\n"
+                f"{details}\n\n"
                 "Dica: no terminal, confira:\n"
                 "  git remote -v\n"
                 "  git status\n"
