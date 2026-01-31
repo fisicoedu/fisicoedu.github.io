@@ -30,12 +30,17 @@ def run_git(args: list[str], cwd: str) -> tuple[int, str, str]:
     return p.returncode, p.stdout.strip(), p.stderr.strip()
 
 
+
 def find_repo_root(start_dir: str) -> str | None:
     """Return git repo root for start_dir, or None if not a repo."""
     code, out, err = run_git(["rev-parse", "--show-toplevel"], cwd=start_dir)
     if code != 0:
         return None
     return out
+
+def git_pull_rebase(cwd: str) -> tuple[int, str, str]:
+    """Pull remote changes with rebase (handles common Pages repos)."""
+    return run_git(["pull", "--rebase", "origin", "main"], cwd=cwd)
 
 
 # --- Simple prompt dialog ---
@@ -304,6 +309,54 @@ class TripsEditorApp(tk.Tk):
         # Push
         code, out, err = run_git(["push"], cwd=repo_root)
         if code != 0:
+            msg_all = (out + "\n" + err).strip().lower()
+
+            # Common case: remote has commits not present locally (fetch first / rejected)
+            if ("fetch first" in msg_all) or ("rejected" in msg_all) or ("non-fast-forward" in msg_all):
+                choice = messagebox.askyesnocancel(
+                    "GitHub",
+                    "O repositório remoto já tem commits e o push foi rejeitado.\n\n"
+                    "SIM  → Integrar mudanças do remoto (git pull --rebase) e tentar de novo (recomendado)\n"
+                    "NÃO  → Forçar push e sobrescrever o remoto (git push --force)\n"
+                    "CANCELAR → Não fazer nada agora"
+                )
+                if choice is None:
+                    return
+
+                if choice is True:
+                    pcode, pout, perr = git_pull_rebase(repo_root)
+                    if pcode != 0:
+                        messagebox.showerror(
+                            "GitHub",
+                            "Falha ao integrar mudanças do remoto (git pull --rebase).\n\n"
+                            f"{perr or pout}\n\n"
+                            "Se aparecer conflito, resolva no VS Code e rode novamente.\n"
+                            "Dica terminal:\n"
+                            "  git status\n"
+                            "  git rebase --continue\n"
+                            "  git rebase --abort"
+                        )
+                        return
+
+                    # Try push again
+                    code2, out2, err2 = run_git(["push"], cwd=repo_root)
+                    if code2 != 0:
+                        messagebox.showerror("GitHub", f"Falha no git push após pull --rebase.\n\n{err2 or out2}")
+                        return
+
+                    messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
+                    return
+
+                # Force push (overwrite remote)
+                fcode, fout, ferr = run_git(["push", "--force"], cwd=repo_root)
+                if fcode != 0:
+                    messagebox.showerror("GitHub", f"Falha no git push --force.\n\n{ferr or fout}")
+                    return
+
+                messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
+                return
+
+            # Other push errors
             messagebox.showerror(
                 "GitHub",
                 "Falha no git push.\n\n"
