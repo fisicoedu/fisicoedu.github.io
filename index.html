@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calendário de Viagens</title>
+
+  <!-- FullCalendar -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css">
+
+  <style>
+    :root{
+      --bg:#fbfbfd;
+      --card:#ffffff;
+      --text:#111827;         /* near-black */
+      --muted:#6b7280;        /* gray-500 */
+      --border:rgba(17,24,39,.10);
+      --shadow: 0 16px 40px rgba(17,24,39,.10);
+
+      --ida:#34d399;          /* pastel green */
+      --volta:#fb7185;        /* pastel pink */
+      --today:#93c5fd;        /* pastel blue */
+      --danger:#fb7185;
+      --ok:#34d399;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      background:
+        radial-gradient(1100px 520px at 10% 0%, rgba(147,197,253,.35), transparent 60%),
+        radial-gradient(900px 520px at 90% 10%, rgba(251,113,133,.28), transparent 55%),
+        radial-gradient(900px 520px at 40% 100%, rgba(52,211,153,.25), transparent 60%),
+        var(--bg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      line-height:1.35;
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 14px 28px;
+    }
+
+    .topbar{
+      display:flex;
+      flex-direction: column;
+      gap:10px;
+      margin-bottom:12px;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    h1{
+      margin:0;
+      font-size: 1.15rem;
+      font-weight: 850;
+      letter-spacing:.2px;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .legend{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      background: rgba(255,255,255,.55);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 12px;
+      box-shadow: 0 8px 22px rgba(17,24,39,.06);
+      backdrop-filter: blur(6px);
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.75);
+      font-size:.9rem;
+      color:var(--text);
+      user-select:none;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      display:inline-block;
+    }
+
+    .card{
+      background: rgba(255,255,255,.86);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(6px);
+    }
+    .pad{ padding: 14px; }
+
+    h2.h2{
+      margin:0 0 10px;
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .view{ margin-top: 8px; }
+    .hidden{ display:none; }
+
+    .row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin: 10px 2px;
+    }
+    .spacer{ flex:1; }
+
+    .btn{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.92);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 850;
+      cursor:pointer;
+      box-shadow: 0 6px 16px rgba(17,24,39,.06);
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.68);
+    }
+
+    .monthGrid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:10px;
+    }
+    @media (min-width: 720px){
+      .monthGrid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    .monthCard{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.92);
+      border-radius: 16px;
+      padding: 12px;
+      cursor:pointer;
+      transition: transform .08s ease;
+    }
+    .monthCard:hover{ transform: translateY(-1px); }
+
+    .monthName{
+      font-weight: 900;
+      margin:0;
+      font-size: 1rem;
+      text-transform: capitalize;
+    }
+    .monthHint{
+      margin:6px 0 0;
+      color: var(--muted);
+      font-size:.9rem;
+    }
+
+    .detailsHeader{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-bottom: 10px;
+    }
+    .meta{
+      color: var(--muted);
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      font-size: .92rem;
+    }
+
+    .note{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    /* FullCalendar theming (clean + light) */
+    .fc{
+      --fc-page-bg-color: transparent;
+      --fc-border-color: rgba(17,24,39,.10);
+      --fc-neutral-bg-color: rgba(17,24,39,.04);
+      --fc-today-bg-color: rgba(147,197,253,.22);
+      --fc-button-bg-color: rgba(17,24,39,.06);
+      --fc-button-border-color: rgba(17,24,39,.12);
+      --fc-button-text-color: var(--text);
+      --fc-button-hover-bg-color: rgba(17,24,39,.10);
+      --fc-button-active-bg-color: rgba(17,24,39,.14);
+    }
+    .fc .fc-toolbar-title{
+      font-size: 1.02rem;
+      font-weight: 900;
+    }
+    .fc .fc-daygrid-day-number{
+      color: var(--text);
+      opacity:.95;
+    }
+    .fc .fc-col-header-cell-cushion{
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    /* Event chips */
+    .tripEvent{
+      border: none !important;
+      padding: 1px 6px !important;
+      border-radius: 999px !important;
+      font-weight: 900;
+      letter-spacing: 0;
+      font-size: .78rem;
+      line-height: 1.2;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .tripEvent.ida{ background: rgba(52,211,153,.30) !important; }
+    .tripEvent.volta{ background: rgba(251,113,133,.28) !important; }
+
+    /* Force event text to black (FullCalendar sometimes forces white) */
+    .fc .tripEvent,
+    .fc .tripEvent .fc-event-main,
+    .fc .tripEvent .fc-event-title,
+    .fc .tripEvent .fc-event-time,
+    .fc .tripEvent a{
+      color: var(--text) !important;
+    }
+
+    /* Prevent title clipping inside day cells */
+    .fc .fc-daygrid-event .fc-event-title{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+    .fc .fc-daygrid-event .fc-event-main{
+      padding: 0 !important;
+      min-width: 0;
+    }
+
+    @media (max-width: 420px){
+      .tripEvent{
+        font-size: .70rem;
+        padding: 1px 5px !important;
+      }
+    }
+
+    /* Details content styling */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
+    }
+    @media (min-width: 820px){
+      .grid{ grid-template-columns: 1.05fr .95fr; }
+    }
+
+    .panel{
+      background: rgba(17,24,39,.03);
+      border:1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .panel h3{
+      margin:0 0 10px;
+      font-size: .98rem;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    .passengerList{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .passengerCard{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.92);
+      border-radius: 14px;
+      padding: 10px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .passengerTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap: wrap; /* mobile */
+    }
+    .pName{
+      font-weight: 900;
+      font-size:.98rem;
+    }
+    .tag{
+      border:1px solid var(--border);
+      background: rgba(17,24,39,.06);
+      padding: 6px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:.82rem;
+      white-space: normal; /* mobile */
+      max-width: 100%;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.94);
+    }
+    th, td{
+      padding: 10px 10px;
+      border-bottom:1px solid rgba(17,24,39,.08);
+      text-align:left;
+      font-size:.92rem;
+      white-space: normal;
+      word-break: break-word;
+    }
+    th{
+      color: var(--muted);
+      font-weight: 900;
+      background: rgba(17,24,39,.04);
+    }
+    tr:last-child td{ border-bottom:none; }
+
+    .cell2line{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      line-height:1.15;
+    }
+    .cellLabel{
+      color: var(--muted);
+      font-weight: 800;
+      font-size: .82rem;
+    }
+    .cellValue{
+      font-weight: 900;
+      font-size: .92rem;
+    }
+
+    .weekdayBlue{
+      color: rgba(37,99,235,.92);
+      font-weight: 800;
+      font-size: .82rem;
+    }
+
+    .muted{ color: var(--muted); }
+
+    .waBtn{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 9999;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      text-decoration:none;
+      color: var(--text);
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 26px rgba(17,24,39,.16);
+      backdrop-filter: blur(6px);
+    }
+    .waIcon{
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      background: rgba(52,211,153,.30);
+      color: #065f46;
+      border: 1px solid rgba(6,95,70,.18);
+      flex: 0 0 auto;
+    }
+    .waText{
+      font-weight: 900;
+      font-size: .92rem;
+      line-height: 1.05;
+      white-space: nowrap;
+    }
+    .waSmall{
+      font-weight: 800;
+      font-size: .82rem;
+      color: var(--muted);
+    }
+    @media (max-width: 420px){
+      .waText{ display:none; }
+      .waBtn{ padding: 10px; }
+    }
+
+    /* Compact toolbar on very small screens */
+    @media (max-width: 420px){
+      .fc .fc-toolbar{ flex-direction:column; gap:10px; align-items:stretch; }
+      .fc .fc-toolbar-title{ text-align:center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <h1>Calendário de viagens</h1>
+        <p class="sub">Escolha um mês e clique no dia da viagem para ver os detalhes.</p>
+      </div>
+
+      <div class="legend" aria-label="Legenda">
+        <span class="pill"><span class="dot" style="background:var(--ida)"></span> IDA</span>
+        <span class="pill"><span class="dot" style="background:var(--volta)"></span> VOLTA</span>
+      </div>
+    </header>
+
+    <!-- VIEW 1: Month picker -->
+    <section id="viewMonths" class="view">
+      <div class="card pad">
+        <h2 class="h2">Selecione o mês</h2>
+        <div id="monthGrid" class="monthGrid"></div>
+        <p class="note">* Mostramos apenas meses que têm viagens cadastradas.</p>
+      </div>
+    </section>
+
+    <!-- VIEW 2: Calendar -->
+    <section id="viewCalendar" class="view hidden">
+      <div class="row">
+        <button id="btnBackToMonths" class="btn ghost">← Meses</button>
+        <div class="spacer"></div>
+        <button id="btnGoToday" class="btn ghost">Hoje</button>
+      </div>
+
+      <section class="card">
+        <div id="calendar"></div>
+      </section>
+      <section class="card pad" style="margin-top:12px">
+        <h2 class="h2" style="margin-bottom:8px">Viagens deste mês</h2>
+        <div id="monthSummary"></div>
+      </section>
+    </section>
+
+    <!-- VIEW 3: Details -->
+    <section id="viewDetails" class="view hidden">
+      <div class="row">
+        <button id="btnBackToCalendar" class="btn ghost">← Calendário</button>
+      </div>
+
+      <div class="card pad">
+        <div class="detailsHeader">
+          <h2 id="detailsTitle" class="h2">Detalhes</h2>
+          <div id="detailsMeta" class="meta"></div>
+        </div>
+        <div id="detailsContent"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+  <script>
+    // Trips are loaded from an external JSON file so index.html stays unchanged.
+    // Create a file named `trips.json` in the same folder as this index.html.
+    let TRIPS = [];
+
+    // WhatsApp config (EDIT THIS PHONE NUMBER)
+    const WHATSAPP_PHONE = "5579991183513"; // example: 55 + DDD + number, only digits
+
+    async function loadTrips(){
+      const res = await fetch("./trips.json", { cache: "no-store" });
+      if(!res.ok){
+        throw new Error(`Não foi possível carregar trips.json (HTTP ${res.status})`);
+      }
+      const data = await res.json();
+      if(!data || !Array.isArray(data.trips)){
+        throw new Error("Formato inválido em trips.json. Esperado: { \"trips\": [ ... ] }");
+      }
+      return data.trips;
+    }
+
+    function showView(name){
+      const views = ["viewMonths","viewCalendar","viewDetails"];
+      for(const v of views){
+        document.getElementById(v).classList.toggle("hidden", v !== name);
+      }
+
+      // FullCalendar needs a resize after becoming visible (it breaks if rendered in a hidden container)
+      if(name === "viewCalendar" && window.__calendar){
+        requestAnimationFrame(() => {
+          window.__calendar.updateSize();
+        });
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function monthKeyFromISO(iso){ return iso.slice(0,7); } // YYYY-MM
+
+    function monthLabel(yyyyMM){
+      const [y,m] = yyyyMM.split("-").map(Number);
+      const dt = new Date(y, m-1, 1);
+      return dt.toLocaleDateString("pt-BR", { month:"long", year:"numeric" });
+    }
+
+    function formatPtBR(isoDate){
+      const [y,m,d] = isoDate.split("-").map(Number);
+      const dt = new Date(y, m-1, d);
+      return dt.toLocaleDateString("pt-BR", { weekday:"long", day:"2-digit", month:"long", year:"numeric" });
+    }
+
+    function formatMonthShortTop(isoDate){
+      const [y,m,d] = isoDate.split("-").map(Number);
+      const dt = new Date(y, m-1, d);
+
+      const dd = String(d).padStart(2,"0");
+      const monthShort = dt.toLocaleDateString("pt-BR", { month: "short" }); // ex: "fev."
+      const yyyy = String(y);
+
+      const top = `${dd} de ${monthShort} ${yyyy}`;
+      const weekday = dt.toLocaleDateString("pt-BR", { weekday:"long" });
+      return { top, weekday };
+    }
+
+    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+    function segmentPairs(stops){
+      const pairs = [];
+      for(let i=0;i<stops.length-1;i++){
+        pairs.push([stops[i], stops[i+1]]);
+      }
+      return pairs;
+    }
+
+    function stopIndexMap(stops){
+      const m = new Map();
+      stops.forEach((s,i) => m.set(s, i));
+      return m;
+    }
+
+    function computeSegmentLoad(trip){
+      const stops = trip.stops || [];
+      const idx = stopIndexMap(stops);
+      const pairs = segmentPairs(stops);
+
+      const load = pairs.map(() => 0);
+
+      const bookings = Array.isArray(trip.bookings) ? trip.bookings : [];
+      for(const b of bookings){
+        const iFrom = idx.get(b.from);
+        const iTo   = idx.get(b.to);
+        if(iFrom === undefined || iTo === undefined) continue;
+
+        const start = Math.min(iFrom, iTo);
+        const end   = Math.max(iFrom, iTo);
+
+        for(let i=start; i<end; i++){
+          load[i] += 1;
+        }
+      }
+
+      return { pairs, load };
+    }
+
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function buildWhatsAppUrl(){
+      const msg = "Olá! Quero reservar uma viagem / tirar dúvidas.";
+      return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function yyyymmFromDate(d){
+      const y = d.getFullYear();
+      const m = String(d.getMonth()+1).padStart(2,"0");
+      return `${y}-${m}`;
+    }
+
+    function renderMonthSummary(yyyyMM){
+      const host = document.getElementById("monthSummary");
+      if(!host) return;
+
+      const list = TRIPS
+        .filter(t => (t.date || "").startsWith(yyyyMM))
+        .slice()
+        .sort((a,b) => (a.date + a.direction).localeCompare(b.date + b.direction));
+
+      if(list.length === 0){
+        host.innerHTML = `<p class="muted">Sem viagens cadastradas para este mês.</p>`;
+        return;
+      }
+
+      const rows = list.map(t => {
+        const from = (t.stops && t.stops.length) ? t.stops[0] : "";
+        const to = (t.stops && t.stops.length) ? t.stops[t.stops.length-1] : "";
+        const dir = t.direction === "ida" ? "IDA" : "VOLTA";
+        const dirColor = t.direction === "ida" ? "var(--ida)" : "var(--volta)";
+        return `
+          <tr>
+            <td>
+              ${(() => {
+                const d = formatMonthShortTop(t.date);
+                return `
+                  <div class="cell2line">
+                    <div class="cellValue">${escapeHtml(d.top)}</div>
+                    <div class="weekdayBlue">${escapeHtml(d.weekday)}</div>
+                  </div>
+                `;
+              })()}
+            </td>
+            <td>
+              <div class="cell2line">
+                <div><span class="cellLabel">De:</span> <span class="cellValue">${escapeHtml(from)}</span></div>
+                <div><span class="cellLabel">Para:</span> <span class="cellValue">${escapeHtml(to)}</span></div>
+              </div>
+            </td>
+            <td><span style="color:${dirColor}; font-weight:900">${dir}</span></td>
+          </tr>
+        `;
+      }).join("");
+
+      host.innerHTML = `
+        <table aria-label="Resumo de viagens do mês">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Trajeto</th>
+              <th>Tipo</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    function buildMonthPicker(){
+      const monthGrid = document.getElementById("monthGrid");
+      const months = Array.from(new Set(TRIPS.map(t => monthKeyFromISO(t.date))))
+        .sort((a,b) => a.localeCompare(b));
+
+      if(months.length === 0){
+        monthGrid.innerHTML = `<p class="muted">Nenhuma viagem cadastrada.</p>`;
+        return;
+      }
+
+      monthGrid.innerHTML = months.map(m => {
+        const count = TRIPS.filter(t => monthKeyFromISO(t.date) === m).length;
+        return `
+          <div class="monthCard" role="button" tabindex="0" data-month="${escapeHtml(m)}">
+            <p class="monthName">${escapeHtml(monthLabel(m))}</p>
+            <p class="monthHint">${count} viagem(ns)</p>
+          </div>
+        `;
+      }).join("");
+
+      monthGrid.querySelectorAll(".monthCard").forEach(card => {
+        const go = () => {
+          const m = card.getAttribute("data-month");
+          if(!m) return;
+
+          showView("viewCalendar");
+
+          const [yy, mm] = m.split("-").map(Number);
+          const dt = new Date(yy, mm-1, 1);
+
+          // Run after the calendar is visible to avoid stale rendering
+          requestAnimationFrame(() => {
+            if(window.__calendar){
+              window.__calendar.gotoDate(dt);
+              window.__calendar.updateSize();
+              renderMonthSummary(yyyymmFromDate(dt));
+            }
+          });
+        };
+        card.addEventListener("click", go);
+        card.addEventListener("keydown", (e) => {
+          if(e.key === "Enter" || e.key === " ") go();
+        });
+      });
+    }
+
+    function renderTripDetails(trip){
+      const dirLabel = trip.direction === "ida" ? "IDA" : "VOLTA";
+      const dirColor = trip.direction === "ida" ? "var(--ida)" : "var(--volta)";
+      const { pairs, load } = computeSegmentLoad(trip);
+
+      const detailsTitleEl = document.getElementById("detailsTitle");
+      const detailsMetaEl = document.getElementById("detailsMeta");
+      const detailsContentEl = document.getElementById("detailsContent");
+
+      detailsTitleEl.innerHTML =
+        `${escapeHtml(trip.title)} — <span style="color:${dirColor}; font-weight:900">${dirLabel}</span>`;
+
+      const firstStop = (trip.stops && trip.stops.length) ? trip.stops[0] : "";
+      const lastStop = (trip.stops && trip.stops.length) ? trip.stops[trip.stops.length-1] : "";
+
+      detailsMetaEl.innerHTML = `
+        <span>📅 ${escapeHtml(formatPtBR(trip.date))}</span>
+        <span>🧭 ${escapeHtml(firstStop)} ─ ${escapeHtml(lastStop)}</span>
+      `;
+
+      // Passengers list
+      const bookings = Array.isArray(trip.bookings) ? trip.bookings : [];
+      const passengersHtml = (bookings.length === 0)
+        ? `<p class="muted">Nenhuma reserva cadastrada para esta data.</p>`
+        : `
+          <div class="passengerList">
+            ${bookings.map(b => `
+              <div class="passengerCard">
+                <div class="passengerTop">
+                  <div class="pName">${escapeHtml(b.name || "Passageiro")}</div>
+                  <span class="tag">${escapeHtml(b.from)} ─ ${escapeHtml(b.to)}</span>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+
+      // Segment availability table
+      const rows = pairs.map((p, i) => {
+        const occupied = load[i];
+        const free = clamp((trip.capacity || 0) - occupied, 0, (trip.capacity || 0));
+        return `
+          <tr>
+            <td>
+              <div class="cell2line">
+                <div><span class="cellLabel">De:</span> <span class="cellValue">${escapeHtml(p[0])}</span></div>
+                <div><span class="cellLabel">Para:</span> <span class="cellValue">${escapeHtml(p[1])}</span></div>
+              </div>
+            </td>
+            <td>
+              ${free === 0
+                ? `<span style="color:var(--danger); font-weight:900">lotado</span>`
+                : `<span class="cellValue">${free}</span>`
+              }
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      const segmentsHtml = pairs.length === 0
+        ? `<p class="muted">Sem segmentos (verifique as paradas da rota).</p>`
+        : `
+          <table aria-label="Vagas por trecho">
+            <thead>
+              <tr>
+                <th>Trajeto</th>
+                <th>Vagas</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+
+      detailsContentEl.innerHTML = `
+        <div class="grid">
+          <div class="panel">
+            <h3>Reservas</h3>
+            ${passengersHtml}
+          </div>
+          <div class="panel">
+            <h3>Vagas por trecho</h3>
+            ${segmentsHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    function buildCalendarEvents(){
+      return TRIPS.map(trip => {
+        const isIda = trip.direction === "ida";
+        return {
+          id: trip.id,
+          title: isIda ? "SE-CE" : "CE-SE",
+          start: trip.date,
+          allDay: true,
+          classNames: ["tripEvent", isIda ? "ida" : "volta"],
+          extendedProps: { tripId: trip.id }
+        };
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      try{
+        TRIPS = await loadTrips();
+      }catch(err){
+        console.error(err);
+        alert("Não foi possível carregar o arquivo trips.json. Verifique se ele existe e está no formato correto.");
+        TRIPS = [];
+      }
+
+      buildMonthPicker();
+      showView("viewMonths");
+
+      const waBtn = document.getElementById("waBtn");
+      if(waBtn) waBtn.href = buildWhatsAppUrl();
+
+      const calendarEl = document.getElementById("calendar");
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: "dayGridMonth",
+        height: "auto",
+        firstDay: 0, // domingo
+        locale: "pt-br",
+        fixedWeekCount: false,
+        headerToolbar: {
+          left: "prev,next",
+          center: "title",
+          right: ""
+        },
+        events: buildCalendarEvents(),
+        datesSet: function(arg){
+          const yyyymm = yyyymmFromDate(arg.view.currentStart);
+          renderMonthSummary(yyyymm);
+        },
+        eventClick: function(info){
+          const id = info.event.extendedProps.tripId;
+          const trip = TRIPS.find(t => t.id === id);
+          if(!trip) return;
+          renderTripDetails(trip);
+          showView("viewDetails");
+        }
+      });
+
+      window.__calendar = calendar;
+      calendar.render();
+
+      document.getElementById("btnBackToMonths").addEventListener("click", () => showView("viewMonths"));
+      document.getElementById("btnBackToCalendar").addEventListener("click", () => {
+        showView("viewCalendar");
+        requestAnimationFrame(() => {
+          if(window.__calendar) window.__calendar.updateSize();
+        });
+      });
+      document.getElementById("btnGoToday").addEventListener("click", () => calendar.today());
+    });
+  </script>
+
+  <!-- WhatsApp contact button (edit the phone number in the script) -->
+  <a id="waBtn" class="waBtn" href="#" target="_blank" rel="noopener" aria-label="Contato via WhatsApp">
+    <span class="waIcon" aria-hidden="true">
+      <!-- WhatsApp SVG icon -->
+      <svg viewBox="0 0 32 32" width="20" height="20" fill="currentColor">
+        <path d="M19.11 17.66c-.27-.14-1.59-.78-1.84-.87-.25-.09-.44-.14-.62.14-.18.27-.71.87-.87 1.05-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.16-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.44.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.85-2.06-.22-.53-.44-.46-.62-.47h-.53c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.3 0 1.36.99 2.67 1.13 2.86.14.18 1.95 2.97 4.72 4.16.66.28 1.18.45 1.58.58.66.21 1.26.18 1.73.11.53-.08 1.59-.65 1.82-1.27.23-.62.23-1.16.16-1.27-.07-.11-.25-.18-.53-.32z"/>
+        <path d="M26.67 5.33C23.82 2.49 20.04.93 16.02.93 7.72.93.98 7.67.98 15.97c0 2.64.69 5.22 2 7.5L.86 31.07l7.79-2.04a15.01 15.01 0 0 0 7.37 1.88h.01c8.3 0 15.04-6.74 15.04-15.04 0-4.02-1.56-7.8-4.4-10.54zM16.03 28.3h-.01c-2.37 0-4.69-.64-6.72-1.85l-.48-.29-4.62 1.21 1.23-4.5-.31-.46a12.27 12.27 0 0 1-1.98-6.65c0-6.78 5.52-12.3 12.31-12.3 3.29 0 6.39 1.28 8.72 3.61a12.24 12.24 0 0 1 3.61 8.71c0 6.79-5.52 12.31-12.31 12.31zM16.03 28.3h-.01c-2.37 0-4.69-.64-6.72-1.85l-.48-.29-4.62 1.21 1.23-4.5-.31-.46a12.27 12.27 0 0 1-1.98-6.65c0-6.78 5.52-12.3 12.31-12.3 3.29 0 6.39 1.28 8.72 3.61a12.24 12.24 0 0 1 3.61 8.71c0 6.79-5.52 12.31-12.31 12.31z"/>
+      </svg>
+    </span>
+    <span class="waText">Reservar viagem<br><span class="waSmall">ou tirar dúvidas</span></span>
+  </a>
+</body>
+</html>
