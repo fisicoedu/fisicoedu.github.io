@@ -1,10 +1,91 @@
 import json
 import os
 import re
-import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
+import sys
+import subprocess
+import datetime
+
+# Tkinter is optional depending on how Python was installed (Homebrew Python often lacks _tkinter).
+try:
+    import tkinter as tk
+    from tkinter import ttk, filedialog, messagebox
+except Exception as e:
+    tk = None  # type: ignore
+    _TK_IMPORT_ERROR = e
+else:
+    _TK_IMPORT_ERROR = None
 
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+# --- Git helpers ---
+def run_git(args: list[str], cwd: str) -> tuple[int, str, str]:
+    """Run a git command and return (returncode, stdout, stderr)."""
+    p = subprocess.run(
+        ["git", *args],
+        cwd=cwd,
+        capture_output=True,
+        text=True
+    )
+    return p.returncode, p.stdout.strip(), p.stderr.strip()
+
+
+def find_repo_root(start_dir: str) -> str | None:
+    """Return git repo root for start_dir, or None if not a repo."""
+    code, out, err = run_git(["rev-parse", "--show-toplevel"], cwd=start_dir)
+    if code != 0:
+        return None
+    return out
+
+
+# --- Simple prompt dialog ---
+def simple_prompt(parent, title: str, label: str, default: str = "") -> str | None:
+    """Small modal prompt to ask for a single line string."""
+    win = tk.Toplevel(parent)
+    win.title(title)
+    win.transient(parent)
+    win.grab_set()
+
+    frm = ttk.Frame(win, padding=12)
+    frm.pack(fill=tk.BOTH, expand=True)
+
+    ttk.Label(frm, text=label).pack(anchor="w")
+    var = tk.StringVar(value=default)
+    ent = ttk.Entry(frm, textvariable=var)
+    ent.pack(fill=tk.X, pady=(6, 10))
+    ent.focus_set()
+
+    btns = ttk.Frame(frm)
+    btns.pack(fill=tk.X)
+
+    result = {"value": None}
+
+    def ok():
+        result["value"] = var.get()
+        win.destroy()
+
+    def cancel():
+        result["value"] = None
+        win.destroy()
+
+    ttk.Button(btns, text="Cancelar", command=cancel).pack(side=tk.RIGHT, padx=4)
+    ttk.Button(btns, text="OK", command=ok).pack(side=tk.RIGHT)
+
+    win.bind("<Return>", lambda e: ok())
+    win.bind("<Escape>", lambda e: cancel())
+
+    win.update_idletasks()
+    # Center the dialog over parent
+    px = parent.winfo_rootx()
+    py = parent.winfo_rooty()
+    pw = parent.winfo_width()
+    ph = parent.winfo_height()
+    ww = win.winfo_reqwidth()
+    wh = win.winfo_reqheight()
+    win.geometry(f"+{px + (pw - ww)//2}+{py + (ph - wh)//2}")
+
+    parent.wait_window(win)
+    return result["value"]
 
 
 def safe_load_json(path: str) -> dict:
@@ -60,6 +141,7 @@ class TripsEditorApp(tk.Tk):
         ttk.Button(btns, text="Abrir…", command=self.open_file).pack(side=tk.LEFT, padx=4)
         ttk.Button(btns, text="Salvar", command=self.save_file).pack(side=tk.LEFT, padx=4)
         ttk.Button(btns, text="Salvar como…", command=self.save_file_as).pack(side=tk.LEFT, padx=4)
+        ttk.Button(btns, text="Publicar no GitHub", command=self.publish_to_github).pack(side=tk.LEFT, padx=4)
 
         # Main split
         main = ttk.PanedWindow(self, orient=tk.HORIZONTAL)
@@ -171,6 +253,69 @@ class TripsEditorApp(tk.Tk):
     def _bind_shortcuts(self):
         self.bind("<Control-s>", lambda e: self.save_file())
         self.bind("<Control-o>", lambda e: self.open_file())
+
+    def publish_to_github(self):
+        # Choose a folder to run git commands from:
+        # - if a json file is open, use its folder
+        # - otherwise use the folder containing this script
+        base_dir = os.path.dirname(self.file_path) if self.file_path else os.path.dirname(os.path.abspath(__file__))
+
+        repo_root = find_repo_root(base_dir)
+        if not repo_root:
+            messagebox.showerror(
+                "GitHub",
+                "Não encontrei um repositório Git neste diretório.\n\n"
+                "Dica: abra esta pasta no terminal e rode:\n"
+                "  git init  (se ainda não)\n"
+                "  git remote add origin <SSH>\n"
+                "  git add .\n  git commit -m \"primeiro commit\"\n  git push -u origin main"
+            )
+            return
+
+        # Ensure file is saved first
+        if self.dirty:
+            if not messagebox.askyesno("GitHub", "Você tem alterações não salvas. Salvar antes de publicar?"):
+                return
+            self.save_file()
+            if self.dirty:
+                return  # save failed or user canceled
+
+        # Ask commit message
+        default_msg = f"atualiza calendário ({datetime.datetime.now().strftime('%Y-%m-%d %H:%M')})"
+        msg = simple_prompt(self, "Mensagem do commit", "Digite uma mensagem para o commit:", default_msg)
+        if msg is None:
+            return
+        msg = msg.strip() or default_msg
+
+        # Stage files (you can limit to trips.json if you prefer, but staging all is safer for assets)
+        code, out, err = run_git(["add", "-A"], cwd=repo_root)
+        if code != 0:
+            messagebox.showerror("GitHub", f"Falha no git add.\n\n{err or out}")
+            return
+
+        # Commit (may fail if nothing to commit)
+        code, out, err = run_git(["commit", "-m", msg], cwd=repo_root)
+        if code != 0:
+            # If nothing to commit, allow pushing anyway (useful when remote changed, etc.)
+            if "nothing to commit" not in (out + " " + err).lower():
+                messagebox.showerror("GitHub", f"Falha no git commit.\n\n{err or out}")
+                return
+
+        # Push
+        code, out, err = run_git(["push"], cwd=repo_root)
+        if code != 0:
+            messagebox.showerror(
+                "GitHub",
+                "Falha no git push.\n\n"
+                f"{err or out}\n\n"
+                "Dica: no terminal, confira:\n"
+                "  git remote -v\n"
+                "  git status\n"
+                "  git branch\n"
+            )
+            return
+
+        messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
 
     # ---------- File ----------
     def open_file(self):
@@ -458,6 +603,24 @@ class TripsEditorApp(tk.Tk):
 
 
 if __name__ == "__main__":
+    if tk is None:
+        print("Erro: Tkinter não está disponível neste Python (módulo _tkinter ausente).", file=sys.stderr)
+        print("Isso é comum no Python do Homebrew. Para usar este editor com interface gráfica:", file=sys.stderr)
+        print("1) Instale tcl-tk e pyenv (se ainda não): brew install tcl-tk pyenv", file=sys.stderr)
+        print("2) Compile um Python via pyenv com suporte ao Tcl/Tk, por exemplo:", file=sys.stderr)
+        print('   export PATH="$(brew --prefix tcl-tk)/bin:$PATH"', file=sys.stderr)
+        print('   export LDFLAGS="-L$(brew --prefix tcl-tk)/lib"', file=sys.stderr)
+        print('   export CPPFLAGS="-I$(brew --prefix tcl-tk)/include"', file=sys.stderr)
+        print('   export PKG_CONFIG_PATH="$(brew --prefix tcl-tk)/lib/pkgconfig"', file=sys.stderr)
+        print('   export PYTHON_CONFIGURE_OPTS="--with-tcl-tk"', file=sys.stderr)
+        print("   pyenv install 3.12.7", file=sys.stderr)
+        print("   pyenv local 3.12.7", file=sys.stderr)
+        print("   python3 -c \"import tkinter; print('Tk OK')\"", file=sys.stderr)
+        print("3) Depois rode: python3 editor_trips.py", file=sys.stderr)
+        print("", file=sys.stderr)
+        print(f"Detalhe do erro original: {_TK_IMPORT_ERROR!r}", file=sys.stderr)
+        raise SystemExit(1)
+
     # Windows: melhora um pouco o visual com tema padrão
     try:
         from ctypes import windll
