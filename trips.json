@@ -74,6 +74,11 @@
           "name": "Vilma",
           "from": "Cabrobó-PE",
           "to": "Aracaju-SE"
+        },
+        {
+          "name": "Thaiani",
+          "from": "Paulo Afonso-SE",
+          "to": "Aracaju-SE"
         }
       ]
     },
