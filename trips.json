@@ -146,6 +146,16 @@
           "name": "Sâmylla",
           "from": "Aracaju-SE",
           "to": "Juazeiro-CE"
+        },
+        {
+          "name": "Getulio",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro-CE"
+        },
+        {
+          "name": "Maria",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro-CE"
         }
       ]
     },
