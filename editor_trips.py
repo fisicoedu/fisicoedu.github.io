@@ -329,6 +329,7 @@ class TripsEditorApp(tk.Tk):
         self.data: dict = {"trips": []}
         self.current_index: int | None = None
         self.dirty = False
+        self._publishing = False
 
         self._build_ui()
         self._bind_shortcuts()
@@ -349,7 +350,8 @@ class TripsEditorApp(tk.Tk):
         ttk.Button(btns, text="Abrir…", command=self.open_file).pack(side=tk.LEFT, padx=4)
         ttk.Button(btns, text="Salvar", command=self.save_file).pack(side=tk.LEFT, padx=4)
         ttk.Button(btns, text="Salvar como…", command=self.save_file_as).pack(side=tk.LEFT, padx=4)
-        ttk.Button(btns, text="Publicar no GitHub", command=self.publish_to_github).pack(side=tk.LEFT, padx=4)
+        self.btn_publish = ttk.Button(btns, text="Publicar no GitHub", command=self.publish_to_github)
+        self.btn_publish.pack(side=tk.LEFT, padx=4)
 
         # Main split
         main = ttk.PanedWindow(self, orient=tk.HORIZONTAL)
@@ -463,148 +465,162 @@ class TripsEditorApp(tk.Tk):
         self.bind("<Control-o>", lambda e: self.open_file())
 
     def publish_to_github(self):
-        # Choose a folder to run git commands from:
-        # - if a json file is open, use its folder
-        # - otherwise use the folder containing this script
-        base_dir = os.path.dirname(self.file_path) if self.file_path else os.path.dirname(os.path.abspath(__file__))
-
-        repo_root = find_repo_root(base_dir)
-        if not repo_root:
-            messagebox.showerror(
-                "GitHub",
-                "Não encontrei um repositório Git neste diretório.\n\n"
-                "Dica: abra esta pasta no terminal e rode:\n"
-                "  git init  (se ainda não)\n"
-                "  git remote add origin <SSH>\n"
-                "  git add .\n  git commit -m \"primeiro commit\"\n  git push -u origin main"
-            )
+        if getattr(self, "_publishing", False):
             return
-
-        # Ensure SSH agent/key are ready (avoids needing a separate terminal to type passphrase).
-        if not ensure_ssh_auth_ready(self):
-            return
-        # Optional: quick diagnostic (doesn't block publishing if GitHub returns non-zero on success)
+        self._publishing = True
         try:
-            test_github_ssh(self)
-        except Exception:
-            pass
+            try:
+                self.btn_publish.configure(state=tk.DISABLED)
+            except Exception:
+                pass
+            # Choose a folder to run git commands from:
+            # - if a json file is open, use its folder
+            # - otherwise use the folder containing this script
+            base_dir = os.path.dirname(self.file_path) if self.file_path else os.path.dirname(os.path.abspath(__file__))
 
-        # Ensure file is saved first
-        if self.dirty:
-            if not messagebox.askyesno("GitHub", "Você tem alterações não salvas. Salvar antes de publicar?"):
-                return
-            self.save_file()
-            if self.dirty:
-                return  # save failed or user canceled
-
-        # Ask commit message
-        default_msg = f"atualiza calendário ({datetime.datetime.now().strftime('%Y-%m-%d %H:%M')})"
-        msg = simple_prompt(self, "Mensagem do commit", "Digite uma mensagem para o commit:", default_msg)
-        if msg is None:
-            return
-        msg = msg.strip() or default_msg
-
-        # Stage files (you can limit to trips.json if you prefer, but staging all is safer for assets)
-        code, out, err = run_git(["add", "-A"], cwd=repo_root)
-        if code != 0:
-            messagebox.showerror("GitHub", f"Falha no git add.\n\n{err or out}")
-            return
-
-        # Commit (may fail if nothing to commit)
-        code, out, err = run_git(["commit", "-m", msg], cwd=repo_root)
-        if code != 0:
-            # If nothing to commit, allow pushing anyway (useful when remote changed, etc.)
-            if "nothing to commit" not in (out + " " + err).lower():
-                messagebox.showerror("GitHub", f"Falha no git commit.\n\n{err or out}")
-                return
-
-        # Push
-        code, out, err = run_git(["push"], cwd=repo_root)
-        if code != 0:
-            msg_all = (out + "\n" + err).strip().lower()
-
-            # Common case: remote has commits not present locally (fetch first / rejected)
-            if ("fetch first" in msg_all) or ("rejected" in msg_all) or ("non-fast-forward" in msg_all):
-                choice = messagebox.askyesnocancel(
+            repo_root = find_repo_root(base_dir)
+            if not repo_root:
+                messagebox.showerror(
                     "GitHub",
-                    "O repositório remoto já tem commits e o push foi rejeitado.\n\n"
-                    "SIM  → Integrar mudanças do remoto (git pull --rebase) e tentar de novo (recomendado)\n"
-                    "NÃO  → Forçar push e sobrescrever o remoto (git push --force)\n"
-                    "CANCELAR → Não fazer nada agora"
+                    "Não encontrei um repositório Git neste diretório.\n\n"
+                    "Dica: abra esta pasta no terminal e rode:\n"
+                    "  git init  (se ainda não)\n"
+                    "  git remote add origin <SSH>\n"
+                    "  git add .\n  git commit -m \"primeiro commit\"\n  git push -u origin main"
                 )
-                if choice is None:
+                return
+
+            # Ensure SSH agent/key are ready (avoids needing a separate terminal to type passphrase).
+            if not ensure_ssh_auth_ready(self):
+                return
+            # Optional: quick diagnostic (doesn't block publishing if GitHub returns non-zero on success)
+            try:
+                test_github_ssh(self)
+            except Exception:
+                pass
+
+            # Ensure file is saved first
+            if self.dirty:
+                if not messagebox.askyesno("GitHub", "Você tem alterações não salvas. Salvar antes de publicar?"):
+                    return
+                self.save_file()
+                if self.dirty:
+                    return  # save failed or user canceled
+
+            # Ask commit message
+            default_msg = f"atualiza calendário ({datetime.datetime.now().strftime('%Y-%m-%d %H:%M')})"
+            msg = simple_prompt(self, "Mensagem do commit", "Digite uma mensagem para o commit:", default_msg)
+            if msg is None:
+                return
+            msg = msg.strip() or default_msg
+
+            # Stage files (you can limit to trips.json if you prefer, but staging all is safer for assets)
+            code, out, err = run_git(["add", "-A"], cwd=repo_root)
+            if code != 0:
+                messagebox.showerror("GitHub", f"Falha no git add.\n\n{err or out}")
+                return
+
+            # Commit (may fail if nothing to commit)
+            code, out, err = run_git(["commit", "-m", msg], cwd=repo_root)
+            if code != 0:
+                # If nothing to commit, allow pushing anyway (useful when remote changed, etc.)
+                if "nothing to commit" not in (out + " " + err).lower():
+                    messagebox.showerror("GitHub", f"Falha no git commit.\n\n{err or out}")
                     return
 
-                if choice is True:
-                    pcode, pout, perr = git_pull_rebase(repo_root)
-                    if pcode != 0:
-                        messagebox.showerror(
-                            "GitHub",
-                            "Falha ao integrar mudanças do remoto (git pull --rebase).\n\n"
-                            f"{perr or pout}\n\n"
-                            "Se aparecer conflito, resolva no VS Code e rode novamente.\n"
-                            "Dica terminal:\n"
-                            "  git status\n"
-                            "  git rebase --continue\n"
-                            "  git rebase --abort"
-                        )
+            # Push
+            code, out, err = run_git(["push"], cwd=repo_root)
+            if code != 0:
+                msg_all = (out + "\n" + err).strip().lower()
+
+                # Common case: remote has commits not present locally (fetch first / rejected)
+                if ("fetch first" in msg_all) or ("rejected" in msg_all) or ("non-fast-forward" in msg_all):
+                    choice = messagebox.askyesnocancel(
+                        "GitHub",
+                        "O repositório remoto já tem commits e o push foi rejeitado.\n\n"
+                        "SIM  → Integrar mudanças do remoto (git pull --rebase) e tentar de novo (recomendado)\n"
+                        "NÃO  → Forçar push e sobrescrever o remoto (git push --force)\n"
+                        "CANCELAR → Não fazer nada agora"
+                    )
+                    if choice is None:
                         return
 
-                    # Try push again
-                    code2, out2, err2 = run_git(["push"], cwd=repo_root)
-                    if code2 != 0:
-                        messagebox.showerror("GitHub", f"Falha no git push após pull --rebase.\n\n{err2 or out2}")
+                    if choice is True:
+                        pcode, pout, perr = git_pull_rebase(repo_root)
+                        if pcode != 0:
+                            messagebox.showerror(
+                                "GitHub",
+                                "Falha ao integrar mudanças do remoto (git pull --rebase).\n\n"
+                                f"{perr or pout}\n\n"
+                                "Se aparecer conflito, resolva no VS Code e rode novamente.\n"
+                                "Dica terminal:\n"
+                                "  git status\n"
+                                "  git rebase --continue\n"
+                                "  git rebase --abort"
+                            )
+                            return
+
+                        # Try push again
+                        code2, out2, err2 = run_git(["push"], cwd=repo_root)
+                        if code2 != 0:
+                            messagebox.showerror("GitHub", f"Falha no git push após pull --rebase.\n\n{err2 or out2}")
+                            return
+
+                        messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
+                        return
+
+                    # Force push (overwrite remote)
+                    fcode, fout, ferr = run_git(["push", "--force"], cwd=repo_root)
+                    if fcode != 0:
+                        messagebox.showerror("GitHub", f"Falha no git push --force.\n\n{ferr or fout}")
                         return
 
                     messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
                     return
 
-                # Force push (overwrite remote)
-                fcode, fout, ferr = run_git(["push", "--force"], cwd=repo_root)
-                if fcode != 0:
-                    messagebox.showerror("GitHub", f"Falha no git push --force.\n\n{ferr or fout}")
+                # Other push errors
+                details = (err or out).strip()
+                low = (out + "\n" + err).lower()
+
+                if ("permission denied" in low) or ("publickey" in low) or ("could not read from remote repository" in low) or ("host key verification failed" in low) or ("batchmode" in low):
+                    messagebox.showerror(
+                        "GitHub",
+                        "Falha de autenticação SSH ao publicar.\n\n"
+                        f"{details}\n\n"
+                        "Como corrigir (no Terminal):\n"
+                        "1) Teste:  ssh -T git@github.com\n"
+                        "2) Carregue a chave no agente (macOS):\n"
+                        "   eval \"$(ssh-agent -s)\"\n"
+                        "   ssh-add --apple-use-keychain ~/.ssh/id_ed25519\n"
+                        "3) Confirme: ssh-add -l\n"
+                        "4) Tente novamente o push.\n\n"
+                        "Se sua rede bloquear a porta 22, configure GitHub via 443 em ~/.ssh/config:\n"
+                        "Host github.com\n"
+                        "  HostName ssh.github.com\n"
+                        "  User git\n"
+                        "  Port 443\n"
+                        "  IdentityFile ~/.ssh/id_ed25519\n"
+                    )
                     return
 
-                messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
-                return
-
-            # Other push errors
-            details = (err or out).strip()
-            low = (out + "\n" + err).lower()
-
-            if ("permission denied" in low) or ("publickey" in low) or ("could not read from remote repository" in low) or ("host key verification failed" in low) or ("batchmode" in low):
                 messagebox.showerror(
                     "GitHub",
-                    "Falha de autenticação SSH ao publicar.\n\n"
+                    "Falha no git push.\n\n"
                     f"{details}\n\n"
-                    "Como corrigir (no Terminal):\n"
-                    "1) Teste:  ssh -T git@github.com\n"
-                    "2) Carregue a chave no agente (macOS):\n"
-                    "   eval \"$(ssh-agent -s)\"\n"
-                    "   ssh-add --apple-use-keychain ~/.ssh/id_ed25519\n"
-                    "3) Confirme: ssh-add -l\n"
-                    "4) Tente novamente o push.\n\n"
-                    "Se sua rede bloquear a porta 22, configure GitHub via 443 em ~/.ssh/config:\n"
-                    "Host github.com\n"
-                    "  HostName ssh.github.com\n"
-                    "  User git\n"
-                    "  Port 443\n"
-                    "  IdentityFile ~/.ssh/id_ed25519\n"
+                    "Dica: no terminal, confira:\n"
+                    "  git remote -v\n"
+                    "  git status\n"
+                    "  git branch\n"
                 )
                 return
 
-            messagebox.showerror(
-                "GitHub",
-                "Falha no git push.\n\n"
-                f"{details}\n\n"
-                "Dica: no terminal, confira:\n"
-                "  git remote -v\n"
-                "  git status\n"
-                "  git branch\n"
-            )
-            return
-
-        messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
+            messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
+        finally:
+            self._publishing = False
+            try:
+                self.btn_publish.configure(state=tk.NORMAL)
+            except Exception:
+                pass
 
     # ---------- File ----------
     def open_file(self):
