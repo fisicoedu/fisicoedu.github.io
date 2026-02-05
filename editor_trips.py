@@ -4,6 +4,7 @@ import re
 import sys
 import subprocess
 import datetime
+import tempfile
 
 # Tkinter is optional depending on how Python was installed (Homebrew Python often lacks _tkinter).
 try:
@@ -47,6 +48,202 @@ def find_repo_root(start_dir: str) -> str | None:
 def git_pull_rebase(cwd: str) -> tuple[int, str, str]:
     """Pull remote changes with rebase (handles common Pages repos)."""
     return run_git(["pull", "--rebase", "origin", "main"], cwd=cwd)
+
+
+# --- SSH agent/key helpers ---
+def _parse_ssh_agent_output(agent_out: str) -> dict:
+    """Parse `ssh-agent -s` output and return env vars."""
+    env_vars: dict[str, str] = {}
+    # Typical lines:
+    # SSH_AUTH_SOCK=/var/folders/.../agent.12345; export SSH_AUTH_SOCK;
+    # SSH_AGENT_PID=12345; export SSH_AGENT_PID;
+    for line in agent_out.splitlines():
+        line = line.strip()
+        if line.startswith("SSH_AUTH_SOCK="):
+            val = line.split("SSH_AUTH_SOCK=", 1)[1].split(";", 1)[0]
+            if val:
+                env_vars["SSH_AUTH_SOCK"] = val
+        elif line.startswith("SSH_AGENT_PID="):
+            val = line.split("SSH_AGENT_PID=", 1)[1].split(";", 1)[0]
+            if val:
+                env_vars["SSH_AGENT_PID"] = val
+    return env_vars
+
+
+def _prompt_passphrase(parent) -> str | None:
+    """Prompt for SSH key passphrase (hidden). Returns None if cancelled."""
+    win = tk.Toplevel(parent)
+    win.title("Senha da chave SSH")
+    win.transient(parent)
+    win.grab_set()
+
+    frm = ttk.Frame(win, padding=12)
+    frm.pack(fill=tk.BOTH, expand=True)
+
+    ttk.Label(frm, text="Digite a senha (passphrase) da sua chave SSH:").pack(anchor="w")
+    var = tk.StringVar(value="")
+    ent = ttk.Entry(frm, textvariable=var, show="*")
+    ent.pack(fill=tk.X, pady=(6, 10))
+    ent.focus_set()
+
+    hint = ttk.Label(
+        frm,
+        text=(
+            "Dica: esta senha é a que você definiu ao criar a chave (~/.ssh/id_ed25519).\n"
+            "Se sua chave não tem senha, deixe em branco e clique em OK."
+        )
+    )
+    hint.pack(anchor="w", pady=(0, 10))
+
+    btns = ttk.Frame(frm)
+    btns.pack(fill=tk.X)
+
+    result = {"value": None}
+
+    def ok():
+        result["value"] = var.get()
+        win.destroy()
+
+    def cancel():
+        result["value"] = None
+        win.destroy()
+
+    ttk.Button(btns, text="Cancelar", command=cancel).pack(side=tk.RIGHT, padx=4)
+    ttk.Button(btns, text="OK", command=ok).pack(side=tk.RIGHT)
+
+    win.bind("<Return>", lambda e: ok())
+    win.bind("<Escape>", lambda e: cancel())
+
+    win.update_idletasks()
+    # Center the dialog over parent
+    px = parent.winfo_rootx()
+    py = parent.winfo_rooty()
+    pw = parent.winfo_width()
+    ph = parent.winfo_height()
+    ww = win.winfo_reqwidth()
+    wh = win.winfo_reqheight()
+    win.geometry(f"+{px + (pw - ww)//2}+{py + (ph - wh)//2}")
+
+    parent.wait_window(win)
+    return result["value"]
+
+
+def ensure_ssh_auth_ready(parent) -> bool:
+    """Ensure an ssh-agent is running and the key is loaded. Returns True if ready."""
+    # 1) If we already have identities, we're good.
+    try:
+        p = subprocess.run(
+            ["ssh-add", "-l"],
+            capture_output=True,
+            text=True,
+            env=os.environ.copy(),
+        )
+        if p.returncode == 0 and p.stdout and "The agent has no identities" not in p.stdout:
+            return True
+    except Exception:
+        pass
+
+    # 2) Start agent (or refresh env vars) so ssh-add can talk to it.
+    agent = subprocess.run(
+        ["ssh-agent", "-s"],
+        capture_output=True,
+        text=True,
+        env=os.environ.copy(),
+    )
+    if agent.returncode != 0:
+        messagebox.showerror("GitHub", f"Falha ao iniciar ssh-agent.\n\n{(agent.stderr or agent.stdout).strip()}")
+        return False
+
+    env_vars = _parse_ssh_agent_output(agent.stdout or "")
+    if not env_vars.get("SSH_AUTH_SOCK"):
+        messagebox.showerror("GitHub", "Não consegui obter SSH_AUTH_SOCK do ssh-agent.")
+        return False
+
+    # Apply to current process so all subsequent git/ssh calls inherit it.
+    os.environ.update(env_vars)
+
+    # 3) Add key (with GUI passphrase prompt via SSH_ASKPASS to avoid terminal interaction).
+    key_path = os.path.expanduser("~/.ssh/id_ed25519")
+    if not os.path.exists(key_path):
+        messagebox.showerror(
+            "GitHub",
+            "Não encontrei a chave SSH em ~/.ssh/id_ed25519.\n\n"
+            "Verifique o caminho da chave ou gere uma nova chave (ssh-keygen).",
+        )
+        return False
+
+    passphrase = _prompt_passphrase(parent)
+    if passphrase is None:
+        return False
+
+    # Create a temporary askpass script that prints the passphrase.
+    # Note: this keeps the passphrase only in memory/env during this call.
+    askpass_path = None
+    try:
+        fd, askpass_path = tempfile.mkstemp(prefix="askpass_", text=True)
+        os.close(fd)
+        with open(askpass_path, "w", encoding="utf-8") as f:
+            f.write("#!/bin/sh\n")
+            f.write('printf "%s" "$SSH_PASSPHRASE"\n')
+        os.chmod(askpass_path, 0o700)
+
+        env = os.environ.copy()
+        env["SSH_ASKPASS"] = askpass_path
+        env["SSH_ASKPASS_REQUIRE"] = "force"
+        env["SSH_PASSPHRASE"] = passphrase
+        # Prevent ssh-add from trying to read from stdin/tty and hanging.
+        env["DISPLAY"] = env.get("DISPLAY", ":0")
+
+        add = subprocess.run(
+            ["ssh-add", "--apple-use-keychain", key_path],
+            capture_output=True,
+            text=True,
+            env=env,
+            stdin=subprocess.DEVNULL,
+            start_new_session=True,
+        )
+        if add.returncode != 0:
+            details = (add.stderr or add.stdout).strip()
+            messagebox.showerror(
+                "GitHub",
+                "Não consegui adicionar a chave ao ssh-agent.\n\n"
+                f"{details}\n\n"
+                "Se a senha estiver incorreta, tente novamente.\n"
+                "Se sua chave não tiver senha, tente OK com o campo em branco.",
+            )
+            return False
+    finally:
+        # Best effort cleanup
+        try:
+            if askpass_path and os.path.exists(askpass_path):
+                os.remove(askpass_path)
+        except Exception:
+            pass
+
+    return True
+
+
+def test_github_ssh(parent) -> None:
+    """Run `ssh -T git@github.com` and show a friendly message."""
+    p = subprocess.run(
+        ["ssh", "-T", "git@github.com"],
+        capture_output=True,
+        text=True,
+        env=os.environ.copy(),
+    )
+    out = ((p.stdout or "") + "\n" + (p.stderr or "")).strip()
+    # GitHub often returns exit code 1 even on success (auth success but no shell).
+    if ("successfully authenticated" in out.lower()) or ("welcome" in out.lower()):
+        messagebox.showinfo("GitHub", "Conexão SSH com GitHub OK ✅")
+        return
+    # Only show details if something looks wrong.
+    if p.returncode != 0:
+        messagebox.showwarning(
+            "GitHub",
+            "Teste SSH com GitHub retornou uma mensagem.\n\n"
+            f"{out}\n\n"
+            "Se aparecer 'Permission denied (publickey)', sua chave ainda não está autorizada no GitHub.",
+        )
 
 
 # --- Simple prompt dialog ---
@@ -282,6 +479,15 @@ class TripsEditorApp(tk.Tk):
                 "  git add .\n  git commit -m \"primeiro commit\"\n  git push -u origin main"
             )
             return
+
+        # Ensure SSH agent/key are ready (avoids needing a separate terminal to type passphrase).
+        if not ensure_ssh_auth_ready(self):
+            return
+        # Optional: quick diagnostic (doesn't block publishing if GitHub returns non-zero on success)
+        try:
+            test_github_ssh(self)
+        except Exception:
+            pass
 
         # Ensure file is saved first
         if self.dirty:
