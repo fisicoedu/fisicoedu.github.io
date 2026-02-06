@@ -18,73 +18,23 @@ else:
 
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
-# Cidades comuns (autocomplete / listas fixas)
-CITIES_COMMON = [
-    "Paulo Afonso-BA",
-    "Petrolândia-PE",
-    "Floresta-PE",
-    "Cabrobó-PE",
-    "Salgueiro-PE",
-    "Juazeiro do Norte-CE",
-    "Brejo Santo-CE",
-]
-
-# Rotas padrão (templates)
-ROUTE_IDA_DEFAULT = [
-    "Paulo Afonso-BA",
-    "Petrolândia-PE",
-    "Floresta-PE",
-    "Cabrobó-PE",
-    "Salgueiro-PE",
-]
-# Volta padrão: rota inversa
-ROUTE_VOLTA_DEFAULT = list(reversed(ROUTE_IDA_DEFAULT))
 
 # --- Git helpers ---
-def run_git(args: list[str], cwd: str, log=None) -> tuple[int, str, str]:
+def run_git(args: list[str], cwd: str) -> tuple[int, str, str]:
     """Run a git command and return (returncode, stdout, stderr). Non-interactive (won't prompt)."""
     env = os.environ.copy()
     # Prevent git from prompting for credentials/passphrases in a GUI-less subprocess.
     env["GIT_TERMINAL_PROMPT"] = "0"
     # Force ssh to be non-interactive; if a passphrase is needed, it will fail quickly.
-    # Use BatchMode only when we don't appear to have an agent with identities.
-    # This avoids edge-cases where forcing BatchMode can interfere with some setups.
-    def _agent_has_identities() -> bool:
-        try:
-            pp = subprocess.run(["ssh-add", "-l"], capture_output=True, text=True, env=os.environ.copy())
-            if pp.returncode == 0 and pp.stdout and "The agent has no identities" not in pp.stdout:
-                return True
-        except Exception:
-            pass
-        return False
-
-    if _agent_has_identities():
-        env.pop("GIT_SSH_COMMAND", None)
-    else:
-        env["GIT_SSH_COMMAND"] = "ssh -o BatchMode=yes"
-    if callable(log):
-        try:
-            log(f"$ git {' '.join(args)}")
-        except Exception:
-            pass
+    env["GIT_SSH_COMMAND"] = "ssh -o BatchMode=yes"
     p = subprocess.run(
         ["git", *args],
         cwd=cwd,
         capture_output=True,
         text=True,
-        env=env,
+        env=env
     )
-    out = (p.stdout or "").strip()
-    err = (p.stderr or "").strip()
-    if callable(log):
-        try:
-            if out:
-                log(out)
-            if err:
-                log(err)
-        except Exception:
-            pass
-    return p.returncode, out, err
+    return p.returncode, (p.stdout or "").strip(), (p.stderr or "").strip()
 
 
 
@@ -93,19 +43,11 @@ def find_repo_root(start_dir: str) -> str | None:
     code, out, err = run_git(["rev-parse", "--show-toplevel"], cwd=start_dir)
     if code != 0:
         return None
-    
-def get_default_branch(cwd: str, log=None) -> str:
-    """Detect default remote branch (origin/HEAD -> main/master). Falls back to main."""
-    code, out, err = run_git(["symbolic-ref", "refs/remotes/origin/HEAD"], cwd=cwd, log=log)
-    if code == 0 and out:
-        parts = out.strip().split("/")
-        if parts:
-            return parts[-1]
-    return "main"
+    return out
 
-def git_pull_rebase(cwd: str, log=None) -> tuple[int, str, str]:
-    branch = get_default_branch(cwd, log=log)
-    return run_git(["pull", "--rebase", "origin", branch], cwd=cwd, log=log)
+def git_pull_rebase(cwd: str) -> tuple[int, str, str]:
+    """Pull remote changes with rebase (handles common Pages repos)."""
+    return run_git(["pull", "--rebase", "origin", "main"], cwd=cwd)
 
 
 # --- SSH agent/key helpers ---
@@ -388,12 +330,10 @@ class TripsEditorApp(tk.Tk):
         self.current_index: int | None = None
         self.dirty = False
         self._publishing = False
-        self._log_lines_max = 400
 
         self._build_ui()
         self._bind_shortcuts()
         self.refresh_ui()
-        self._update_dirty_ui()
 
     # ---------- UI ----------
     def _build_ui(self):
@@ -422,42 +362,14 @@ class TripsEditorApp(tk.Tk):
         main.add(left, weight=1)
 
         ttk.Label(left, text="Viagens").pack(anchor="w")
-
-        self.nb_left = ttk.Notebook(left)
-        self.nb_left.pack(fill=tk.BOTH, expand=True, pady=(6, 8))
-
-        tab_list = ttk.Frame(self.nb_left)
-        tab_cal = ttk.Frame(self.nb_left)
-        self.nb_left.add(tab_list, text="Lista")
-        self.nb_left.add(tab_cal, text="Calendário")
-
-        # Tab: Lista
-        self.listbox = tk.Listbox(tab_list, height=20)
-        self.listbox.pack(fill=tk.BOTH, expand=True)
+        self.listbox = tk.Listbox(left, height=20)
+        self.listbox.pack(fill=tk.BOTH, expand=True, pady=(6, 8))
         self.listbox.bind("<<ListboxSelect>>", self.on_select_trip)
-
-        # Tab: Calendário
-        cal_top = ttk.Frame(tab_cal, padding=(0, 0, 0, 6))
-        cal_top.pack(fill=tk.X)
-        ttk.Label(cal_top, text="Mês:").pack(side=tk.LEFT)
-        self.var_month = tk.StringVar(value="")
-        self.cmb_month = ttk.Combobox(cal_top, textvariable=self.var_month, values=[], state="readonly")
-        self.cmb_month.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=6)
-        self.cmb_month.bind("<<ComboboxSelected>>", self.on_select_month)
-
-        self.cal_tree = ttk.Treeview(tab_cal, columns=("date", "trips"), show="headings", height=18)
-        self.cal_tree.heading("date", text="Data")
-        self.cal_tree.heading("trips", text="Viagens")
-        self.cal_tree.column("date", width=110, anchor="w")
-        self.cal_tree.column("trips", width=360, anchor="w")
-        self.cal_tree.pack(fill=tk.BOTH, expand=True)
-        self.cal_tree.bind("<<TreeviewSelect>>", self.on_select_calendar_row)
 
         left_btns = ttk.Frame(left)
         left_btns.pack(fill=tk.X)
 
         ttk.Button(left_btns, text="Nova viagem", command=self.new_trip).pack(side=tk.LEFT, padx=3)
-        ttk.Button(left_btns, text="Nova (template)", command=self.new_trip_template).pack(side=tk.LEFT, padx=3)
         ttk.Button(left_btns, text="Duplicar", command=self.duplicate_trip).pack(side=tk.LEFT, padx=3)
         ttk.Button(left_btns, text="Remover", command=self.delete_trip).pack(side=tk.LEFT, padx=3)
 
@@ -482,6 +394,7 @@ class TripsEditorApp(tk.Tk):
         self.var_direction = tk.StringVar()
         self.var_title = tk.StringVar()
         self.var_capacity = tk.StringVar()
+        self.var_stops = tk.StringVar()
 
         add_row(0, "id", ttk.Entry(form, textvariable=self.var_id))
         add_row(1, "date (YYYY-MM-DD)", ttk.Entry(form, textvariable=self.var_date))
@@ -491,31 +404,7 @@ class TripsEditorApp(tk.Tk):
 
         add_row(3, "title", ttk.Entry(form, textvariable=self.var_title))
         add_row(4, "capacity", ttk.Entry(form, textvariable=self.var_capacity))
-
-        # Stops editor (list + controls)
-        stops_container = ttk.Frame(form)
-
-        stops_top = ttk.Frame(stops_container)
-        stops_top.pack(fill=tk.X)
-
-        self.var_stop_new = tk.StringVar()
-        self.cmb_stop_new = ttk.Combobox(stops_top, textvariable=self.var_stop_new, values=CITIES_COMMON)
-        self.cmb_stop_new.pack(side=tk.LEFT, fill=tk.X, expand=True)
-        ttk.Button(stops_top, text="Adicionar", command=self.add_stop).pack(side=tk.LEFT, padx=6)
-
-        stops_mid = ttk.Frame(stops_container)
-        stops_mid.pack(fill=tk.X, pady=(6, 0))
-
-        self.stops_listbox = tk.Listbox(stops_mid, height=4)
-        self.stops_listbox.pack(side=tk.LEFT, fill=tk.X, expand=True)
-
-        stops_btns = ttk.Frame(stops_mid)
-        stops_btns.pack(side=tk.RIGHT, padx=(8, 0))
-        ttk.Button(stops_btns, text="↑", width=3, command=self.move_stop_up).pack(fill=tk.X, pady=1)
-        ttk.Button(stops_btns, text="↓", width=3, command=self.move_stop_down).pack(fill=tk.X, pady=1)
-        ttk.Button(stops_btns, text="Remover", command=self.remove_stop).pack(fill=tk.X, pady=1)
-
-        add_row(5, "Paradas (ordem)", stops_container)
+        add_row(5, "stops (separar por ;)", ttk.Entry(form, textvariable=self.var_stops))
 
         # Bookings section
         ttk.Separator(right).pack(fill=tk.X, pady=10)
@@ -552,7 +441,7 @@ class TripsEditorApp(tk.Tk):
         ttk.Entry(booking_edit, textvariable=self.var_b_from).grid(row=0, column=3, sticky="we", padx=6)
 
         ttk.Label(booking_edit, text="Para").grid(row=0, column=4, sticky="w")
-        ttk.Combobox(booking_edit, textvariable=self.var_b_to, values=CITIES_COMMON).grid(row=0, column=5, sticky="we", padx=6)
+        ttk.Entry(booking_edit, textvariable=self.var_b_to).grid(row=0, column=5, sticky="we", padx=6)
 
         booking_edit.grid_columnconfigure(1, weight=1)
         booking_edit.grid_columnconfigure(3, weight=1)
@@ -570,80 +459,9 @@ class TripsEditorApp(tk.Tk):
         ttk.Separator(right).pack(fill=tk.X, pady=10)
         ttk.Button(right, text="Aplicar alterações desta viagem", command=self.apply_trip_changes).pack(anchor="e")
 
-        # Log panel (bottom)
-        log_frame = ttk.Labelframe(self, text="Log", padding=8)
-        log_frame.pack(side=tk.BOTTOM, fill=tk.BOTH, padx=8, pady=(0, 8))
-
-        log_btns = ttk.Frame(log_frame)
-        log_btns.pack(fill=tk.X)
-        ttk.Button(log_btns, text="Limpar log", command=self._clear_log).pack(side=tk.RIGHT)
-
-        self.txt_log = tk.Text(log_frame, height=8, wrap="word", state=tk.DISABLED)
-        self.txt_log.pack(fill=tk.BOTH, expand=True, pady=(6, 0))
-
     def _bind_shortcuts(self):
         self.bind("<Control-s>", lambda e: self.save_file())
         self.bind("<Control-o>", lambda e: self.open_file())
-        # Autocomplete básico para o campo de nova parada
-        try:
-            self.cmb_stop_new.bind("<KeyRelease>", self._on_stop_autocomplete)
-        except Exception:
-            pass
-
-    def _update_dirty_ui(self):
-        star = " *" if self.dirty else ""
-        self.title(f"Editor de trips.json{star}")
-        if self.file_path:
-            extra = " (alterações pendentes)" if self.dirty else ""
-            self.lbl_file.configure(text=f"Arquivo: {self.file_path}{extra}")
-        else:
-            self.lbl_file.configure(text="Arquivo: (nenhum)")
-
-    def _append_log(self, text: str):
-        if not hasattr(self, "txt_log"):
-            return
-        try:
-            ts = datetime.datetime.now().strftime("%H:%M:%S")
-            msg = f"[{ts}] {text}\n"
-            self.txt_log.configure(state=tk.NORMAL)
-            self.txt_log.insert(tk.END, msg)
-            # Trim old lines
-            lines = int(self.txt_log.index('end-1c').split('.')[0])
-            if lines > self._log_lines_max:
-                self.txt_log.delete('1.0', f"{lines - self._log_lines_max}.0")
-            self.txt_log.see(tk.END)
-            self.txt_log.configure(state=tk.DISABLED)
-        except Exception:
-            pass
-
-    def _clear_log(self):
-        if not hasattr(self, "txt_log"):
-            return
-        try:
-            self.txt_log.configure(state=tk.NORMAL)
-            self.txt_log.delete('1.0', tk.END)
-            self.txt_log.configure(state=tk.DISABLED)
-        except Exception:
-            pass
-
-    def _on_stop_autocomplete(self, _evt=None):
-    """Autocomplete simples: completa a partir do prefixo digitado."""
-    try:
-        typed = (self.var_stop_new.get() or "").strip()
-        if not typed:
-            return
-        typed_low = typed.lower()
-        for city in CITIES_COMMON:
-            if city.lower().startswith(typed_low) and city != typed:
-                self.var_stop_new.set(city)
-                try:
-                    self.cmb_stop_new.icursor(len(typed))
-                    self.cmb_stop_new.selection_range(len(typed), tk.END)
-                except Exception:
-                    pass
-                return
-    except Exception:
-        pass
 
     def publish_to_github(self):
         if getattr(self, "_publishing", False):
@@ -654,8 +472,6 @@ class TripsEditorApp(tk.Tk):
                 self.btn_publish.configure(state=tk.DISABLED)
             except Exception:
                 pass
-            self._append_log("—" * 40)
-            self._append_log("Iniciando publicação...")
             # Choose a folder to run git commands from:
             # - if a json file is open, use its folder
             # - otherwise use the folder containing this script
@@ -697,86 +513,22 @@ class TripsEditorApp(tk.Tk):
                 return
             msg = msg.strip() or default_msg
 
-            # --- Helper functions for status and staged files ---
-            def _get_status_porcelain() -> str:
-                scode, sout, serr = run_git(["status", "--porcelain"], cwd=repo_root, log=self._append_log)
-                if scode != 0:
-                    return ""
-                return sout.strip()
-
-            def _get_staged_names() -> list[str]:
-                dcode, dout, derr = run_git(["diff", "--cached", "--name-only"], cwd=repo_root, log=self._append_log)
-                if dcode != 0:
-                    return []
-                return [ln.strip() for ln in dout.splitlines() if ln.strip()]
-
-            # Stage files
-            status_before = _get_status_porcelain()
-            if status_before:
-                # Special warning: .DS_Store tracked/modified often causes noise
-                if any(line.endswith(".DS_Store") and (line[:2].strip() != "??") for line in status_before.splitlines()):
-                    self._append_log("Aviso: .DS_Store está no repositório e aparece como modificado. Considere remover do git e ignorar.")
-
-            stage_all = False
-            if self.file_path:
-                stage_all = not messagebox.askyesno(
-                    "GitHub",
-                    "Publicar apenas o arquivo JSON aberto (recomendado)?\n\n"
-                    "SIM → Apenas o arquivo atual\n"
-                    "NÃO → Todos os arquivos do repositório",
-                )
-
-            if (not stage_all) and self.file_path:
-                rel = os.path.relpath(self.file_path, repo_root)
-                code, out, err = run_git(["add", rel], cwd=repo_root, log=self._append_log)
-            else:
-                code, out, err = run_git(["add", "-A"], cwd=repo_root, log=self._append_log)
+            # Stage files (you can limit to trips.json if you prefer, but staging all is safer for assets)
+            code, out, err = run_git(["add", "-A"], cwd=repo_root)
             if code != 0:
                 messagebox.showerror("GitHub", f"Falha no git add.\n\n{err or out}")
                 return
 
-            # If nothing is staged, offer to stage everything (common when JSON wasn't changed)
-            staged = _get_staged_names()
-            if not staged:
-                if messagebox.askyesno(
-                    "GitHub",
-                    "Não há alterações preparadas para commit (staged).\n\n"
-                    "Isso pode acontecer se o JSON não mudou, mas há outros arquivos modificados (ex.: editor_trips.py, .DS_Store).\n\n"
-                    "Deseja preparar TODOS os arquivos do repositório para commit agora?",
-                ):
-                    code, out, err = run_git(["add", "-A"], cwd=repo_root, log=self._append_log)
-                    if code != 0:
-                        messagebox.showerror("GitHub", f"Falha no git add -A.\n\n{err or out}")
-                        return
-                    staged = _get_staged_names()
-
-            # If still nothing staged, we can still push (useful if only pulling/rebasing), or abort.
-            if not staged:
-                if messagebox.askyesno(
-                    "GitHub",
-                    "Ainda não há nada para commitar.\n\n"
-                    "Deseja tentar apenas o git push mesmo assim?",
-                ):
-                    code, out, err = run_git(["push"], cwd=repo_root, log=self._append_log)
-                    if code != 0:
-                        messagebox.showerror("GitHub", f"Falha no git push.\n\n{err or out}")
-                        return
-                    self._append_log("Push concluído ✅")
-                    messagebox.showinfo("GitHub", "Push concluído ✅")
-                return
-
             # Commit (may fail if nothing to commit)
-            code, out, err = run_git(["commit", "-m", msg], cwd=repo_root, log=self._append_log)
+            code, out, err = run_git(["commit", "-m", msg], cwd=repo_root)
             if code != 0:
-                low_msg = (out + " " + err).lower()
                 # If nothing to commit, allow pushing anyway (useful when remote changed, etc.)
-                if ("nothing to commit" not in low_msg) and ("no changes added to commit" not in low_msg):
+                if "nothing to commit" not in (out + " " + err).lower():
                     messagebox.showerror("GitHub", f"Falha no git commit.\n\n{err or out}")
                     return
-                self._append_log("Nada para commitar (nenhuma mudança staged).")
 
             # Push
-            code, out, err = run_git(["push"], cwd=repo_root, log=self._append_log)
+            code, out, err = run_git(["push"], cwd=repo_root)
             if code != 0:
                 msg_all = (out + "\n" + err).strip().lower()
 
@@ -793,7 +545,7 @@ class TripsEditorApp(tk.Tk):
                         return
 
                     if choice is True:
-                        pcode, pout, perr = git_pull_rebase(repo_root, log=self._append_log)
+                        pcode, pout, perr = git_pull_rebase(repo_root)
                         if pcode != 0:
                             messagebox.showerror(
                                 "GitHub",
@@ -808,20 +560,20 @@ class TripsEditorApp(tk.Tk):
                             return
 
                         # Try push again
-                        code2, out2, err2 = run_git(["push"], cwd=repo_root, log=self._append_log)
+                        code2, out2, err2 = run_git(["push"], cwd=repo_root)
                         if code2 != 0:
                             messagebox.showerror("GitHub", f"Falha no git push após pull --rebase.\n\n{err2 or out2}")
                             return
-                        self._append_log("Publicado com sucesso ✅")
+
                         messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
                         return
 
                     # Force push (overwrite remote)
-                    fcode, fout, ferr = run_git(["push", "--force"], cwd=repo_root, log=self._append_log)
+                    fcode, fout, ferr = run_git(["push", "--force"], cwd=repo_root)
                     if fcode != 0:
                         messagebox.showerror("GitHub", f"Falha no git push --force.\n\n{ferr or fout}")
                         return
-                    self._append_log("Publicado com sucesso ✅")
+
                     messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
                     return
 
@@ -861,7 +613,6 @@ class TripsEditorApp(tk.Tk):
                 )
                 return
 
-            self._append_log("Publicado com sucesso ✅")
             messagebox.showinfo("GitHub", "Publicado com sucesso! ✅")
         finally:
             self._publishing = False
@@ -892,7 +643,6 @@ class TripsEditorApp(tk.Tk):
         self.lbl_file.configure(text=f"Arquivo: {path}")
         self.current_index = None
         self.dirty = False
-        self._update_dirty_ui()
         self.refresh_ui()
 
     def save_file(self):
@@ -902,7 +652,6 @@ class TripsEditorApp(tk.Tk):
         try:
             safe_save_json(self.file_path, self.data)
             self.dirty = False
-            self._update_dirty_ui()
             messagebox.showinfo("Salvo", "Arquivo salvo com sucesso.")
         except Exception as e:
             messagebox.showerror("Erro ao salvar", str(e))
@@ -934,125 +683,11 @@ class TripsEditorApp(tk.Tk):
         # Clear editor
         if self.current_index is None:
             self._load_trip_into_form(None)
-            self._update_dirty_ui()
-        
-    def _month_options(self) -> list[str]:
-    months: set[str] = set()
-    for t in self.data.get("trips", []):
-        d = str(t.get("date", "")).strip()
-        if DATE_RE.match(d):
-            months.add(d[:7])  # YYYY-MM
-    return sorted(months)
-
-    # Update calendar month options
-    try:
-        months = self._month_options()
-        self.cmb_month.configure(values=months)
-        if months:
-            if (not self.var_month.get()) or (self.var_month.get() not in months):
-                self.var_month.set(months[-1])
-            self._populate_calendar(self.var_month.get())
-        else:
-            self.var_month.set("")
-            for iid in self.cal_tree.get_children():
-                self.cal_tree.delete(iid)
-    except Exception:
-        pass
-
-def _populate_calendar(self, month: str):
-    for iid in self.cal_tree.get_children():
-        self.cal_tree.delete(iid)
-
-    grouped: dict[str, list[dict]] = {}
-    for idx, t in enumerate(self.data.get("trips", [])):
-        d = str(t.get("date", "")).strip()
-        if DATE_RE.match(d) and d.startswith(month):
-            grouped.setdefault(d, []).append({"idx": idx, "trip": t})
-
-    for d in sorted(grouped.keys()):
-        labels = []
-        for item in grouped[d]:
-            t = item["trip"]
-            direction = t.get("direction", "")
-            short = "IDA" if direction == "ida" else ("VOLTA" if direction == "volta" else str(direction))
-            title = (t.get("title", "") or "").strip()
-            labels.append(f"{short} {title}".strip())
-        iids = ",".join(str(item["idx"]) for item in grouped[d])
-        self.cal_tree.insert("", tk.END, iid=iids, values=(d, " | ".join(labels)))
-
-def on_select_month(self, _evt=None):
-    month = (self.var_month.get() or "").strip()
-    if not month:
-        return
-    self._populate_calendar(month)
-
-def on_select_calendar_row(self, _evt=None):
-    sel = self.cal_tree.selection()
-    if not sel:
-        return
-    iid = sel[0]
-    try:
-        first = int(str(iid).split(",")[0])
-    except Exception:
-        return
-    if 0 <= first < len(self.data.get("trips", [])):
-        self.current_index = first
-        self._load_trip_into_form(self.data["trips"][first])
-        try:
-            self.listbox.selection_clear(0, tk.END)
-            self.listbox.selection_set(first)
-            self.listbox.see(first)
-        except Exception:
-            pass
 
     def sort_trips(self):
         self.data["trips"].sort(key=lambda t: (t.get("date", ""), t.get("direction", ""), t.get("id", "")))
         self.dirty = True
-        self._update_dirty_ui()
         self.refresh_ui()
-
-    def add_stop(self):
-        s = (self.var_stop_new.get() if hasattr(self, "var_stop_new") else "").strip()
-        if not s:
-            return
-        self.stops_listbox.insert(tk.END, s)
-        self.var_stop_new.set("")
-        self.dirty = True
-        self._update_dirty_ui()
-
-    def remove_stop(self):
-        sel = self.stops_listbox.curselection()
-        if not sel:
-            return
-        self.stops_listbox.delete(sel[0])
-        self.dirty = True
-        self._update_dirty_ui()
-
-    def move_stop_up(self):
-        sel = self.stops_listbox.curselection()
-        if not sel or sel[0] == 0:
-            return
-        i = sel[0]
-        val = self.stops_listbox.get(i)
-        self.stops_listbox.delete(i)
-        self.stops_listbox.insert(i - 1, val)
-        self.stops_listbox.selection_set(i - 1)
-        self.dirty = True
-        self._update_dirty_ui()
-
-    def move_stop_down(self):
-        sel = self.stops_listbox.curselection()
-        if not sel:
-            return
-        i = sel[0]
-        if i >= self.stops_listbox.size() - 1:
-            return
-        val = self.stops_listbox.get(i)
-        self.stops_listbox.delete(i)
-        self.stops_listbox.insert(i + 1, val)
-        self.stops_listbox.selection_set(i + 1)
-        self.dirty = True
-        self._update_dirty_ui()
 
     def on_select_trip(self, _evt=None):
         sel = self.listbox.curselection()
@@ -1075,67 +710,12 @@ def on_select_calendar_row(self, _evt=None):
         }
         self.data["trips"].append(trip)
         self.dirty = True
-        self._update_dirty_ui()
         self.refresh_ui()
         self.current_index = len(self.data["trips"]) - 1
         self.listbox.selection_clear(0, tk.END)
         self.listbox.selection_set(self.current_index)
         self.listbox.see(self.current_index)
         self._load_trip_into_form(trip)
-
-    def new_trip_template(self):
-    choice = messagebox.askyesnocancel(
-        "Template",
-        "Criar viagem a partir de template?\n\n"
-        "SIM → Template de IDA\n"
-        "NÃO → Template de VOLTA\n"
-        "CANCELAR → Não criar",
-    )
-    if choice is None:
-        return
-
-    direction = "ida" if choice is True else "volta"
-
-    extra = messagebox.askyesno(
-        "Template",
-        "Incluir cidades opcionais na rota?\n\n"
-        "• Juazeiro do Norte-CE\n"
-        "• Brejo Santo-CE",
-    )
-
-    if direction == "ida":
-        stops = ROUTE_IDA_DEFAULT.copy()
-        if extra:
-            if "Juazeiro do Norte-CE" not in stops:
-                stops.append("Juazeiro do Norte-CE")
-            if "Brejo Santo-CE" not in stops:
-                stops.append("Brejo Santo-CE")
-    else:
-        if extra:
-            ext = ROUTE_IDA_DEFAULT.copy() + ["Juazeiro do Norte-CE", "Brejo Santo-CE"]
-            stops = list(reversed(ext))
-        else:
-            stops = ROUTE_VOLTA_DEFAULT.copy()
-
-    trip = {
-        "id": "",
-        "date": "",
-        "direction": direction,
-        "title": "",
-        "capacity": 3,
-        "stops": stops,
-        "bookings": [],
-    }
-
-    self.data["trips"].append(trip)
-    self.dirty = True
-    self._update_dirty_ui()
-    self.refresh_ui()
-    self.current_index = len(self.data["trips"]) - 1
-    self.listbox.selection_clear(0, tk.END)
-    self.listbox.selection_set(self.current_index)
-    self.listbox.see(self.current_index)
-    self._load_trip_into_form(trip)
 
     def duplicate_trip(self):
         if self.current_index is None:
@@ -1146,7 +726,6 @@ def on_select_calendar_row(self, _evt=None):
         dup["id"] = (dup.get("id", "") + "-copy").strip("-")
         self.data["trips"].append(dup)
         self.dirty = True
-        self._update_dirty_ui()
         self.refresh_ui()
 
     def delete_trip(self):
@@ -1159,7 +738,6 @@ def on_select_calendar_row(self, _evt=None):
         del self.data["trips"][self.current_index]
         self.current_index = None
         self.dirty = True
-        self._update_dirty_ui()
         self.refresh_ui()
 
     def apply_trip_changes(self):
@@ -1167,54 +745,39 @@ def on_select_calendar_row(self, _evt=None):
             messagebox.showwarning("Selecione", "Selecione (ou crie) uma viagem para editar.")
             return
 
+        # Validate and apply
         tid = self.var_id.get().strip()
         date = self.var_date.get().strip()
-        # Normalize date like 2026-2-3 -> 2026-02-03
-        if date and "-" in date and DATE_RE.match(date) is None:
-            parts = date.split("-")
-            if len(parts) == 3 and all(p.isdigit() for p in parts):
-                y, m, d = parts
-                if len(y) == 4:
-                    date = f"{y}-{m.zfill(2)}-{d.zfill(2)}"
-                    self.var_date.set(date)
-
         direction = self.var_direction.get().strip()
         title = self.var_title.get().strip()
         cap_str = self.var_capacity.get().strip()
+        stops_str = self.var_stops.get().strip()
 
         if not tid:
             messagebox.showerror("Validação", "O campo id é obrigatório.")
             return
-
         if not DATE_RE.match(date):
             messagebox.showerror("Validação", "Data inválida. Use YYYY-MM-DD (ex.: 2026-02-03).")
             return
-        try:
-            datetime.date.fromisoformat(date)
-        except Exception:
-            messagebox.showerror("Validação", "Data inexistente no calendário. Verifique dia/mês/ano.")
-            return
-
         if direction not in ("ida", "volta"):
             messagebox.showerror("Validação", 'Direction deve ser "ida" ou "volta".')
             return
-
         try:
             capacity = int(cap_str)
-            if capacity <= 0 or capacity > 10:
+            if capacity <= 0:
                 raise ValueError()
         except Exception:
-            messagebox.showerror("Validação", "Capacity deve ser um inteiro entre 1 e 10 (ex.: 3).")
+            messagebox.showerror("Validação", "Capacity deve ser um inteiro positivo (ex.: 3).")
             return
 
-        stops = [self.stops_listbox.get(i).strip() for i in range(self.stops_listbox.size())]
-        stops = [s for s in stops if s]
+        stops = [s.strip() for s in stops_str.split(";") if s.strip()]
         if len(stops) < 2:
-            messagebox.showerror("Validação", "Stops deve ter pelo menos 2 cidades.")
+            messagebox.showerror("Validação", "Stops deve ter pelo menos 2 cidades (separe por ;).")
             return
 
         trip = self.data["trips"][self.current_index]
 
+        # Ensure unique id (except current)
         for i, t in enumerate(self.data["trips"]):
             if i != self.current_index and t.get("id") == tid:
                 messagebox.showerror("Validação", f'Já existe outra viagem com id="{tid}".')
@@ -1227,9 +790,10 @@ def on_select_calendar_row(self, _evt=None):
         trip["capacity"] = capacity
         trip["stops"] = stops
 
+        # Bookings are edited via table; we keep as is
         self.dirty = True
-        self._update_dirty_ui()
         self.refresh_ui()
+        # keep selection
         self.listbox.selection_clear(0, tk.END)
         self.listbox.selection_set(self.current_index)
         self.listbox.see(self.current_index)
@@ -1241,8 +805,7 @@ def on_select_calendar_row(self, _evt=None):
             self.var_direction.set("ida")
             self.var_title.set("")
             self.var_capacity.set("3")
-            if hasattr(self, "stops_listbox"):
-                self.stops_listbox.delete(0, tk.END)
+            self.var_stops.set("")
             self._reload_bookings([])
             return
 
@@ -1252,14 +815,11 @@ def on_select_calendar_row(self, _evt=None):
         self.var_title.set(trip.get("title", ""))
         self.var_capacity.set(str(trip.get("capacity", 3)))
 
-        if hasattr(self, "stops_listbox"):
-            self.stops_listbox.delete(0, tk.END)
-            stops = trip.get("stops", [])
-            if isinstance(stops, list):
-                for s in stops:
-                    ss = str(s).strip()
-                    if ss:
-                        self.stops_listbox.insert(tk.END, ss)
+        stops = trip.get("stops", [])
+        if isinstance(stops, list):
+            self.var_stops.set("; ".join(stops))
+        else:
+            self.var_stops.set("")
 
         self._reload_bookings(trip.get("bookings", []))
 
@@ -1302,7 +862,6 @@ def on_select_calendar_row(self, _evt=None):
             trip["bookings"] = []
         trip["bookings"].append({"name": name, "from": frm, "to": to})
         self.dirty = True
-        self._update_dirty_ui()
         self._reload_bookings(trip["bookings"])
 
     def update_booking(self):
@@ -1326,7 +885,6 @@ def on_select_calendar_row(self, _evt=None):
         trip = self.data["trips"][self.current_index]
         trip["bookings"][idx] = {"name": name, "from": frm, "to": to}
         self.dirty = True
-        self._update_dirty_ui()
         self._reload_bookings(trip["bookings"])
 
     def remove_booking(self):
@@ -1345,7 +903,6 @@ def on_select_calendar_row(self, _evt=None):
             return
         del trip["bookings"][idx]
         self.dirty = True
-        self._update_dirty_ui()
         self._reload_bookings(trip["bookings"])
 
 

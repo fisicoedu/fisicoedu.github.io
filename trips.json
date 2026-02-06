@@ -91,6 +91,8 @@
       "stops": [
         "Aracaju-SE",
         "Cabrobó-PE",
+	"Salgueiro-PE",
+	"Juazeiro-CE",
         "Cedro-CE"
       ],
       "bookings": [
@@ -98,6 +100,16 @@
           "name": "Vilma",
           "from": "Aracaju-SE",
           "to": "Cabrobó-PE"
+        },
+	{
+          "name": "Messias",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro-CE"
+        },
+	{
+          "name": "Hemory",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
         }
       ]
     },
