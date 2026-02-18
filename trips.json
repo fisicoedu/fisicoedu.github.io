@@ -187,6 +187,16 @@
           "name": "Samuel",
           "from": "Juazeiro-CE",
           "to": "Aracaju-SE"
+        },
+        {
+          "name": "Getulio",
+          "from": "Juazeiro-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Maria",
+          "from": "Juazeiro-CE",
+          "to": "Aracaju-SE"
         }
       ]
     },
@@ -200,7 +210,13 @@
         "Aracaju-SE",
         "Cedro-CE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Thiago",
+          "from": "Aracaju-SE",
+          "to": "Serra Talhada-PE"
+        }
+      ]
     },
     {
       "id": "2026-03-11-volta",
