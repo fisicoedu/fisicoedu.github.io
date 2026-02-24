@@ -209,11 +209,22 @@
       "stops": [
         "Aracaju-SE",
         "Serra Talhada-PE",
+        "Salgueiro-PE",
         "Cedro-CE"
       ],
       "bookings": [
         {
           "name": "Thiago",
+          "from": "Aracaju-SE",
+          "to": "Serra Talhada-PE"
+        },
+        {
+          "name": "Hemory",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
+        },
+        {
+          "name": "Emily",
           "from": "Aracaju-SE",
           "to": "Serra Talhada-PE"
         }
