@@ -1,0 +1,371 @@
+{
+  "trips": [
+    {
+      "id": "2026-02-01-ida",
+      "date": "2026-02-01",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Petrolândia-PE",
+        "Floresta-PE",
+        "Salgueiro-PE",
+        "Juazeiro-CE",
+        "Cedro-CE"
+      ],
+      "bookings": [
+        {
+          "name": "Júnior",
+          "from": "Aracaju-SE",
+          "to": "Floresta-PE"
+        },
+        {
+          "name": "Leandro",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
+        },
+        {
+          "name": "Rebeca",
+          "from": "Petrolândia-PE",
+          "to": "Floresta-PE"
+        },
+        {
+          "name": "Fabíola",
+          "from": "Salgueiro-PE",
+          "to": "Juazeiro-CE"
+        },
+        {
+          "name": "Fabíola",
+          "from": "Salgueiro-PE",
+          "to": "Juazeiro-CE"
+        },
+        {
+          "name": "Fabíola",
+          "from": "Salgueiro-PE",
+          "to": "Juazeiro-CE"
+        },
+        {
+          "name": "Arthur",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        }
+      ]
+    },
+    {
+      "id": "2026-02-04-volta",
+      "date": "2026-02-04",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Cabrobó-PE",
+        "Paulo Afonso-BA",
+        "Aracaju-SE"
+      ],
+      "bookings": [
+        {
+          "name": "Daniel",
+          "from": "Cabrobó-PE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Vilma",
+          "from": "Cabrobó-PE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Thaiani",
+          "from": "Paulo Afonso-SE",
+          "to": "Aracaju-SE"
+        }
+      ]
+    },
+    {
+      "id": "2026-02-08-ida",
+      "date": "2026-02-08",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cabrobó-PE",
+        "Salgueiro-PE",
+        "Juazeiro-CE",
+        "Cedro-CE"
+      ],
+      "bookings": [
+        {
+          "name": "Vilma",
+          "from": "Aracaju-SE",
+          "to": "Cabrobó-PE"
+        },
+        {
+          "name": "Messias",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro-CE"
+        },
+        {
+          "name": "Hemory",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
+        }
+      ]
+    },
+    {
+      "id": "2026-02-11-volta",
+      "date": "2026-02-11",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Serra Talhada-PE",
+        "Aracaju-SE"
+      ],
+      "bookings": [
+        {
+          "name": "Jairan",
+          "from": "Serra Talhada-PE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Jairan",
+          "from": "Serra Talhada-PE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Emily",
+          "from": "Serra Talhada-PE",
+          "to": "Aracaju-SE"
+        }
+      ]
+    },
+    {
+      "id": "2026-02-22-ida",
+      "date": "2026-02-22",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Juazeiro-CE",
+        "Cedro-CE"
+      ],
+      "bookings": [
+        {
+          "name": "Sâmylla",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro-CE"
+        },
+        {
+          "name": "Getulio",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro-CE"
+        },
+        {
+          "name": "Maria",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro-CE"
+        }
+      ]
+    },
+    {
+      "id": "2026-02-25-volta",
+      "date": "2026-02-25",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Juazeiro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [
+        {
+          "name": "Samuel",
+          "from": "Juazeiro-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Getulio",
+          "from": "Juazeiro-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Maria",
+          "from": "Juazeiro-CE",
+          "to": "Aracaju-SE"
+        }
+      ]
+    },
+    {
+      "id": "2026-03-08-ida",
+      "date": "2026-03-08",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Serra Talhada-PE",
+        "Salgueiro-PE",
+        "Cedro-CE"
+      ],
+      "bookings": [
+        {
+          "name": "Thiago",
+          "from": "Aracaju-SE",
+          "to": "Serra Talhada-PE"
+        },
+        {
+          "name": "Hemory",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
+        },
+        {
+          "name": "Emily",
+          "from": "Aracaju-SE",
+          "to": "Serra Talhada-PE"
+        }
+      ]
+    },
+    {
+      "id": "2026-03-11-volta",
+      "date": "2026-03-11",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Juazeiro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [
+        {
+          "name": "Genisson",
+          "from": "Juazeiro-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Geovani",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Geovani",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        }
+      ]
+    },
+    {
+      "id": "2026-03-15-ida",
+      "date": "2026-03-15",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": []
+    },
+    {
+      "id": "2026-03-25-volta",
+      "date": "2026-03-25",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": []
+    },
+    {
+      "id": "2026-03-29-ida",
+      "date": "2026-03-29",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": []
+    },
+    {
+      "id": "2026-04-02-volta",
+      "date": "2026-04-02",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": []
+    },
+    {
+      "id": "2026-04-05-ida",
+      "date": "2026-04-05",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": []
+    },
+    {
+      "id": "2026-04-09-volta",
+      "date": "2026-04-09",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": []
+    },
+    {
+      "id": "2026-04-12-ida",
+      "date": "2026-04-12",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": []
+    },
+    {
+      "id": "2026-04-16-volta",
+      "date": "2026-04-16",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": []
+    },
+    {
+      "id": "2026-04-26-ida",
+      "date": "2026-04-26",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": []
+    }
+  ]
+}
