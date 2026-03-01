@@ -249,13 +249,13 @@
         },
         {
           "name": "Geovani",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
         },
         {
           "name": "Geovani",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
         }
       ]
     },
@@ -269,7 +269,23 @@
         "Aracaju-SE",
         "Cedro-CE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Melissa",
+          "from": "Aracaju-SE",
+          "to": "Milagres-CE"
+        },
+        {
+          "name": "Melissa",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
+        },
+        {
+          "name": "Melissa",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
+        }
+      ]
     },
     {
       "id": "2026-03-25-volta",
