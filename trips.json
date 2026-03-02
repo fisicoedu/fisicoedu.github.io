@@ -208,8 +208,9 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Povoado Km 40",
         "Serra Talhada-PE",
-        "Salgueiro-PE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
       "bookings": [
@@ -219,14 +220,19 @@
           "to": "Serra Talhada-PE"
         },
         {
-          "name": "Hemory",
-          "from": "Aracaju-SE",
-          "to": "Salgueiro-PE"
+          "name": "Cauã Gonçalves",
+          "from": "Serra Talhada-PE",
+          "to": "Juazeiro do Norte-CE"
         },
         {
           "name": "Emily",
           "from": "Aracaju-SE",
           "to": "Serra Talhada-PE"
+        },
+        {
+          "name": "Almir",
+          "from": "Aracaju-SE",
+          "to": "Povoado Km 40"
         }
       ]
     },
