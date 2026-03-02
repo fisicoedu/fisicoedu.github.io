@@ -244,14 +244,14 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Juazeiro-CE",
+        "Juazeiro do Norte-CE",
         "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
       "bookings": [
         {
           "name": "Genisson",
-          "from": "Juazeiro-CE",
+          "from": "Juazeiro do Norte-CE",
           "to": "Aracaju-SE"
         },
         {
