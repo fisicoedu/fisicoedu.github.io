@@ -37,22 +37,36 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 # Cidades comuns (autocomplete / listas fixas)
 CITIES_COMMON = [
+    "Aracaju-SE",
+    "Jeremoabo-BA",
+    "Povoado Km 40-BA",
     "Paulo Afonso-BA",
     "Petrolândia-PE",
     "Floresta-PE",
+    "Serra Talhada-PE",
     "Cabrobó-PE",
     "Salgueiro-PE",
-    "Juazeiro do Norte-CE",
     "Brejo Santo-CE",
+    "Barbalha-CE",
+    "Juazeiro do Norte-CE",
+    "Cedro-CE",
 ]
 
 # Rotas padrão (templates)
 ROUTE_IDA_DEFAULT = [
+    "Aracaju-SE",
+    "Jeremoabo-BA",
+    "Povoado Km 40-BA",
     "Paulo Afonso-BA",
     "Petrolândia-PE",
     "Floresta-PE",
+    "Serra Talhada-PE",
     "Cabrobó-PE",
     "Salgueiro-PE",
+    "Brejo Santo-CE",
+    "Barbalha-CE",
+    "Juazeiro do Norte-CE",
+    "Cedro-CE",
 ]
 # Volta padrão: rota inversa
 ROUTE_VOLTA_DEFAULT = list(reversed(ROUTE_IDA_DEFAULT))
@@ -851,7 +865,7 @@ class TripsEditorApp(tk.Tk):
         add_row(0, "id", id_row)
 
         self.ent_date = ttk.Entry(form, textvariable=self.var_date)
-        add_row(1, "date (YYYY-MM-DD)", self.ent_date)
+        add_row(1, "Data (YYYY-MM-DD)", self.ent_date)
 
         self.cmb_direction = ttk.Combobox(
             form,
@@ -859,12 +873,12 @@ class TripsEditorApp(tk.Tk):
             values=["ida", "volta"],
             state="readonly",
         )
-        add_row(2, "direction", self.cmb_direction)
+        add_row(2, "Direção", self.cmb_direction)
 
-        add_row(3, "title", ttk.Entry(form, textvariable=self.var_title))
+        add_row(3, "Título", ttk.Entry(form, textvariable=self.var_title))
 
         self.ent_capacity = ttk.Entry(form, textvariable=self.var_capacity)
-        add_row(4, "capacity", self.ent_capacity)
+        add_row(4, "Capacidade", self.ent_capacity)
 
         self.lbl_validation = ttk.Label(editor_left, text="", foreground="#b00020")
         self.lbl_validation.pack(anchor="w", pady=(2, 6))
