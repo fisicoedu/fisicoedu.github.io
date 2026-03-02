@@ -208,6 +208,9 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Povoado Km 40",
+        "Serra Talhada-PE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
       "bookings": [
@@ -215,6 +218,16 @@
           "name": "Thiago",
           "from": "Aracaju-SE",
           "to": "Serra Talhada-PE"
+        },
+        {
+          "name": "Cauã Gonçalves",
+          "from": "Serra Talhada-PE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Almir",
+          "from": "Aracaju-SE",
+          "to": "Povoado Km 40"
         }
       ]
     },
@@ -227,12 +240,23 @@
       "stops": [
         "Cedro-CE",
         "Juazeiro-CE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
       "bookings": [
         {
           "name": "Genisson",
           "from": "Juazeiro-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Geovani",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Geovani",
+          "from": "Paulo Afonso-BA",
           "to": "Aracaju-SE"
         }
       ]
@@ -245,9 +269,22 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Salgueiro-PE",
+        "Milagres-CE",
         "Cedro-CE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Melissa",
+          "from": "Aracaju-SE",
+          "to": "Milagres-CE"
+        },
+        {
+          "name": "Vilma",
+          "from": "Aracaju-SE",
+          "to": "Cabrobó-PE"
+        }
+      ]
     },
     {
       "id": "2026-03-25-volta",
@@ -329,9 +366,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Belém de São Francisco-PE",
         "Aracaju-SE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Júnior",
+          "from": "Belém de São Francisco-PE",
+          "to": "Aracaju-SE"
+        }
+      ]
     },
     {
       "id": "2026-04-26-ida",
@@ -341,9 +385,16 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Belém de São Francisco-PE",
         "Cedro-CE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Júnior",
+          "from": "Aracaju-SE",
+          "to": "Belém de São Francisco-PE"
+        }
+      ]
     }
   ]
 }
