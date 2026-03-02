@@ -370,9 +370,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Belém de São Francisco-PE",
         "Aracaju-SE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Júnior",
+          "from": "Belém de São Francisco-PE",
+          "to": "Aracaju-SE"
+        }
+      ]
     },
     {
       "id": "2026-04-26-ida",
@@ -382,9 +389,16 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Belém de São Francisco-PE",
         "Cedro-CE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Júnior",
+          "from": "Aracaju-SE",
+          "to": "Belém de São Francisco-PE"
+        }
+      ]
     }
   ]
 }
