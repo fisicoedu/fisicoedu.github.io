@@ -209,6 +209,7 @@
       "stops": [
         "Aracaju-SE",
         "Povoado Km 40",
+        "Paulo Afonso-BA",
         "Serra Talhada-PE",
         "Juazeiro do Norte-CE",
         "Cedro-CE"
@@ -233,6 +234,11 @@
           "name": "João Augusto",
           "from": "Serra Talhada-PE",
           "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Claudemir",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
         }
       ]
     },
@@ -245,6 +251,8 @@
       "stops": [
         "Cedro-CE",
         "Juazeiro do Norte-CE",
+        "Cabrobó-PE",
+        "Belém de São Francisco-PE",
         "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
@@ -255,13 +263,13 @@
           "to": "Aracaju-SE"
         },
         {
-          "name": "Geovani",
-          "from": "Paulo Afonso-BA",
+          "name": "Júnior",
+          "from": "Belém de São Francisco-PE",
           "to": "Aracaju-SE"
         },
         {
-          "name": "Geovani",
-          "from": "Paulo Afonso-BA",
+          "name": "Vilma",
+          "from": "Cabrobó-PE",
           "to": "Aracaju-SE"
         }
       ]
@@ -274,6 +282,7 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Belém de São Francisco-PE",
         "Cabrobó-PE",
         "Milagres-CE",
         "Cedro-CE"
@@ -288,6 +297,11 @@
           "name": "Vilma",
           "from": "Aracaju-SE",
           "to": "Cabrobó-PE"
+        },
+        {
+          "name": "Júnior",
+          "from": "Aracaju-SE",
+          "to": "Belém de São Francisco-PE"
         }
       ]
     },
