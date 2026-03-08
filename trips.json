@@ -210,7 +210,10 @@
         "Aracaju-SE",
         "Povoado Km 40",
         "Paulo Afonso-BA",
+        "Petrolândia-PE",
+        "Floresta-PE",
         "Serra Talhada-PE",
+        "Brejo Santo-CE",
         "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
@@ -221,7 +224,7 @@
           "to": "Serra Talhada-PE"
         },
         {
-          "name": "Cauã Gonçalves",
+          "name": "Ayana",
           "from": "Serra Talhada-PE",
           "to": "Juazeiro do Norte-CE"
         },
@@ -231,14 +234,29 @@
           "to": "Povoado Km 40"
         },
         {
-          "name": "João Augusto",
+          "name": "Maria",
           "from": "Serra Talhada-PE",
-          "to": "Juazeiro do Norte-CE"
+          "to": "Brejo Santo-CE"
         },
         {
           "name": "Claudemir",
           "from": "Aracaju-SE",
           "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Víctor",
+          "from": "Floresta-PE",
+          "to": "Serra Talhada-PE"
+        },
+        {
+          "name": "Natália",
+          "from": "Petrolândia-PE",
+          "to": "Floresta-PE"
+        },
+        {
+          "name": "Dominique",
+          "from": "Paulo Afonso-BA",
+          "to": "Serra Talhada-PE"
         }
       ]
     },
