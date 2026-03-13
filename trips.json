@@ -343,6 +343,7 @@
       "stops": [
         "Aracaju-SE",
         "Salgueiro-PE",
+        "Lavras da Mangabeira-CE",
         "Cedro-CE"
       ],
       "bookings": [
@@ -355,6 +356,11 @@
           "name": "Melissa",
           "from": "Aracaju-SE",
           "to": "Salgueiro-PE"
+        },
+        {
+          "name": "Joel",
+          "from": "Salgueiro-PE",
+          "to": "Lavras da Mangabeira-CE"
         }
       ]
     },
@@ -378,21 +384,40 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Maria",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Getulio",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        }
+      ]
     },
     {
-      "id": "2026-04-09-volta",
-      "date": "2026-04-09",
+      "id": "2026-04-08-volta",
+      "date": "2026-04-08",
       "direction": "volta",
       "title": "Cedro → Aju",
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Samuell",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Paulo Afonso-BA"
+        }
+      ]
     },
     {
       "id": "2026-04-12-ida",
@@ -414,6 +439,7 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Juazeiro do Norte-CE",
         "Belém de São Francisco-PE",
         "Aracaju-SE"
       ],
@@ -421,6 +447,11 @@
         {
           "name": "Júnior",
           "from": "Belém de São Francisco-PE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Genisson",
+          "from": "Juazeiro do Norte-CE",
           "to": "Aracaju-SE"
         }
       ]
