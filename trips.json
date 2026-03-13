@@ -302,6 +302,7 @@
         "Belém de São Francisco-PE",
         "Cabrobó-PE",
         "Milagres-CE",
+        "Povoado Mangabeira-CE",
         "Cedro-CE"
       ],
       "bookings": [
@@ -319,6 +320,11 @@
           "name": "Júnior",
           "from": "Aracaju-SE",
           "to": "Belém de São Francisco-PE"
+        },
+        {
+          "name": "Atos",
+          "from": "Salgueiro-PE",
+          "to": "Povoado Mangabeira-CE"
         }
       ]
     },
