@@ -336,9 +336,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Juazeiro do Norte-CE",
         "Aracaju-SE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Emmyle (dog)",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        }
+      ]
     },
     {
       "id": "2026-03-29-ida",
@@ -378,9 +385,22 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Ipaumirim-CE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Anderson",
+          "from": "Ipaumirim-CE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Anderson",
+          "from": "Ipaumirim-CE",
+          "to": "Paulo Afonso-BA"
+        }
+      ]
     },
     {
       "id": "2026-04-05-ida",
@@ -459,6 +479,11 @@
           "name": "Genisson",
           "from": "Juazeiro do Norte-CE",
           "to": "Aracaju-SE"
+        },
+        {
+          "name": "Melissa",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
         }
       ]
     },
@@ -478,6 +503,30 @@
           "name": "Júnior",
           "from": "Aracaju-SE",
           "to": "Belém de São Francisco-PE"
+        }
+      ]
+    },
+    {
+      "id": "2026-04-30",
+      "date": "2026-04-30",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Juazeiro do Norte-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [
+        {
+          "name": "Ana",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Ana",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
         }
       ]
     }
