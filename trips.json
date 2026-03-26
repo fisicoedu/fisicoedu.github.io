@@ -361,16 +361,6 @@
       ],
       "bookings": [
         {
-          "name": "Melissa",
-          "from": "Aracaju-SE",
-          "to": "Salgueiro-PE"
-        },
-        {
-          "name": "Melissa",
-          "from": "Aracaju-SE",
-          "to": "Salgueiro-PE"
-        },
-        {
           "name": "Joel",
           "from": "Salgueiro-PE",
           "to": "Lavras da Mangabeira-CE"
@@ -399,6 +389,21 @@
           "name": "Anderson",
           "from": "Ipaumirim-CE",
           "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "João",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Jhuly Anne",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Jhuly Anne",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
         }
       ]
     },
