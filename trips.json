@@ -566,9 +566,16 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Raquel",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        }
+      ]
     },
     {
       "id": "2026-04-30-volta",
@@ -589,6 +596,11 @@
         },
         {
           "name": "Ana",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Raquel",
           "from": "Juazeiro do Norte-CE",
           "to": "Aracaju-SE"
         }
@@ -614,9 +626,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Cabrobó-PE",
         "Aracaju-SE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Vilma",
+          "from": "Cabrobó-PE",
+          "to": "Aracaju-SE"
+        }
+      ]
     },
     {
       "id": "2026-05-17-ida",
@@ -626,9 +645,26 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Cabrobó-PE",
         "Cedro-CE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Vilma",
+          "from": "Aracaju-SE",
+          "to": "Cabrobó-PE"
+        },
+        {
+          "name": "Ericka",
+          "from": "Aracaju-SE",
+          "to": "Cabrobó-PE"
+        },
+        {
+          "name": "Ericka",
+          "from": "Aracaju-SE",
+          "to": "Cabrobó-PE"
+        }
+      ]
     },
     {
       "id": "2026-05-21-volta",
@@ -662,9 +698,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Belém de São Francisco-PE",
         "Aracaju-SE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Júnior",
+          "from": "Belém de São Francisco-PE",
+          "to": "Aracaju-SE"
+        }
+      ]
     },
     {
       "id": "2026-05-31-ida",
