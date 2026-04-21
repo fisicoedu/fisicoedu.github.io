@@ -535,7 +535,8 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
-        "Belém de São Francisco-PE",
+        "Brejo Santo-CE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
       "bookings": [
@@ -543,6 +544,16 @@
           "name": "Júnior",
           "from": "Aracaju-SE",
           "to": "Belém de São Francisco-PE"
+        },
+        {
+          "name": "Vítor",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Caio",
+          "from": "Aracaju-SE",
+          "to": "Brejo Santo-CE"
         }
       ]
     },
@@ -813,9 +824,16 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Socorro",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        }
+      ]
     },
     {
       "id": "2026-07-04-volta",
@@ -825,9 +843,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Juazeiro do Norte-CE",
         "Aracaju-SE"
       ],
-      "bookings": []
+      "bookings": [
+        {
+          "name": "Socorro",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        }
+      ]
     }
   ]
 }
