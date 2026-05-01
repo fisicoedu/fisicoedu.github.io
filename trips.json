@@ -572,7 +572,7 @@
           "to": "Brejo Santo-CE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-05-07-volta",
@@ -624,7 +624,7 @@
           "to": "Juazeiro do Norte-CE"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-04-30-volta",
@@ -680,13 +680,7 @@
         "Cabrobó-PE",
         "Aracaju-SE"
       ],
-      "bookings": [
-        {
-          "name": "Vilma",
-          "from": "Cabrobó-PE",
-          "to": "Aracaju-SE"
-        }
-      ],
+      "bookings": [],
       "_ui_prefix": ""
     },
     {
@@ -701,11 +695,6 @@
         "Cedro-CE"
       ],
       "bookings": [
-        {
-          "name": "Vilma",
-          "from": "Aracaju-SE",
-          "to": "Cabrobó-PE"
-        },
         {
           "name": "Ericka",
           "from": "Aracaju-SE",
@@ -753,14 +742,21 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Belém de São Francisco-PE",
-        "Aracaju-SE"
+        "Ipaumirim-CE",
+        "Paulo Afonso-BA",
+        "Aracaju-SE",
+        "Belém de São Francisco-PE"
       ],
       "bookings": [
         {
           "name": "Júnior",
           "from": "Belém de São Francisco-PE",
           "to": "Aracaju-SE"
+        },
+        {
+          "name": "Cauã",
+          "from": "Ipaumirim-CE",
+          "to": "Paulo Afonso-BA"
         }
       ],
       "_ui_prefix": ""
