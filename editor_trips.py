@@ -449,7 +449,9 @@ def make_trip_label(t: dict) -> str:
     direction = t.get("direction", "?")
     title = t.get("title", "")
     short = "IDA" if direction == "ida" else ("VOLTA" if direction == "volta" else direction)
-    return f"{date} • {short} • {title}".strip(" •")
+    prefix = str(t.get("_ui_prefix", "")).strip()
+    label = f"{date} • {short} • {title}".strip(" •")
+    return f"{prefix} {label}".strip()
 
 def _slugify(s: str) -> str:
     s = unicodedata.normalize("NFKD", s)
@@ -458,6 +460,7 @@ def _slugify(s: str) -> str:
     s = re.sub(r"[^a-z0-9]+", "-", s)
     s = re.sub(r"-+", "-", s).strip("-")
     return s
+
 
 def make_backup(path: str, max_backups: int = 10) -> None:
     """Cria backup com timestamp em backups_trips (best effort)."""
@@ -485,7 +488,99 @@ def make_backup(path: str, max_backups: int = 10) -> None:
     except Exception:
         pass
 
+# --- Date and route helpers ---
+def parse_iso_date(s: str) -> datetime.date | None:
+    try:
+        return datetime.date.fromisoformat((s or "").strip())
+    except Exception:
+        return None
+
+
+def canonical_route_for_direction(direction: str) -> list[str]:
+    return ROUTE_IDA_DEFAULT.copy() if direction == "ida" else ROUTE_VOLTA_DEFAULT.copy()
+
+
 class TripsEditorApp(tk.Tk):
+    def _find_next_upcoming_index(self) -> int | None:
+        """Return the index of the nearest trip whose date is today or later."""
+        today = datetime.date.today()
+        best: tuple[datetime.date, int] | None = None
+        for idx, t in enumerate(self.data.get("trips", [])):
+            d = parse_iso_date(str(t.get("date", "")))
+            if d is None or d < today:
+                continue
+            if best is None or d < best[0]:
+                best = (d, idx)
+        return best[1] if best else None
+
+    def _decorate_trip_list(self):
+        """Gray out past trips and highlight the next upcoming trip in the listbox."""
+        try:
+            today = datetime.date.today()
+            next_idx = self._find_next_upcoming_index()
+            for idx, t in enumerate(self.data.get("trips", [])):
+                d = parse_iso_date(str(t.get("date", "")))
+                fg = "#111111"
+                bg = "white"
+                if d is not None and d < today:
+                    fg = "#9a9a9a"
+                if next_idx is not None and idx == next_idx:
+                    bg = "#eaf3ff"
+                    fg = "#0b57d0" if not (d is not None and d < today) else "#6d87b8"
+                self.listbox.itemconfig(idx, fg=fg, bg=bg)
+        except Exception:
+            pass
+
+    def _sync_stops_listbox_from_trip(self, trip: dict):
+        """Refresh the visible stops editor from the trip dict."""
+        try:
+            self.stops_listbox.delete(0, tk.END)
+            for s in trip.get("stops", []):
+                ss = str(s).strip()
+                if ss:
+                    self.stops_listbox.insert(tk.END, ss)
+        except Exception:
+            pass
+
+    def _ensure_booking_cities_in_trip(self, trip: dict, frm: str, to: str):
+        """Ensure booking origin/destination exist in trip stops, inserting automatically when possible."""
+        frm = (frm or "").strip()
+        to = (to or "").strip()
+        if not frm or not to:
+            return
+
+        stops = [str(s).strip() for s in trip.get("stops", []) if str(s).strip()]
+        if len(stops) < 2:
+            stops = canonical_route_for_direction(str(trip.get("direction", "ida")))
+
+        changed = False
+        direction = str(trip.get("direction", "ida"))
+        canonical = canonical_route_for_direction(direction)
+        canonical_pos = {city: i for i, city in enumerate(canonical)}
+
+        def sort_like_route(seq: list[str]) -> list[str]:
+            known = [c for c in seq if c in canonical_pos]
+            unknown = [c for c in seq if c not in canonical_pos]
+            known_sorted = sorted(dict.fromkeys(known), key=lambda c: canonical_pos[c])
+            result = known_sorted[:]
+            for c in unknown:
+                if c not in result:
+                    result.append(c)
+            return result
+
+        for city in (frm, to):
+            if city not in stops:
+                stops.append(city)
+                changed = True
+
+        if changed:
+            stops = sort_like_route(stops)
+            trip["stops"] = stops
+            try:
+                self._sync_stops_listbox_from_trip(trip)
+            except Exception:
+                pass
+            self._set_status("Rota atualizada automaticamente com cidade da reserva")
 
     def _refresh_segments_view(self, trip: dict | None):
         # Clear existing rows
@@ -1574,15 +1669,40 @@ class TripsEditorApp(tk.Tk):
     # ---------- Trips CRUD ----------
 
     def refresh_ui(self):
+        # Marca textual temporária para destacar a próxima viagem
+        next_idx_for_label = self._find_next_upcoming_index()
+        for i, t in enumerate(self.data.get("trips", [])):
+            if isinstance(t, dict):
+                t["_ui_prefix"] = "[PRÓXIMA]" if (next_idx_for_label is not None and i == next_idx_for_label) else ""
         # Listbox
         self.listbox.delete(0, tk.END)
         for t in self.data.get("trips", []):
             self.listbox.insert(tk.END, make_trip_label(t))
 
-        # Clear editor if no selection
+        self._decorate_trip_list()
+
+        # If nothing is selected, prefer the next upcoming trip
         if self.current_index is None:
-            self._load_trip_into_form(None)
+            next_idx = self._find_next_upcoming_index()
+            if next_idx is not None:
+                self.current_index = next_idx
+                try:
+                    self.listbox.selection_clear(0, tk.END)
+                    self.listbox.selection_set(next_idx)
+                    self.listbox.see(next_idx)
+                except Exception:
+                    pass
+                self._load_trip_into_form(self.data["trips"][next_idx])
+            else:
+                self._load_trip_into_form(None)
             self._clear_validation()
+        else:
+            try:
+                self.listbox.selection_clear(0, tk.END)
+                self.listbox.selection_set(self.current_index)
+                self.listbox.see(self.current_index)
+            except Exception:
+                pass
 
         self._update_dirty_ui()
         self._update_controls_state()
@@ -1798,6 +1918,7 @@ class TripsEditorApp(tk.Tk):
         self.current_index = idx
         trip = self.data["trips"][idx]
         self._load_trip_into_form(trip)
+        self._decorate_trip_list()
         self._update_controls_state()
 
     def new_trip(self):
@@ -2111,6 +2232,7 @@ class TripsEditorApp(tk.Tk):
             return
 
         trip = self.data["trips"][self.current_index]
+        self._ensure_booking_cities_in_trip(trip, frm, to)
         trip.setdefault("bookings", [])
         if not isinstance(trip["bookings"], list):
             trip["bookings"] = []
@@ -2119,6 +2241,7 @@ class TripsEditorApp(tk.Tk):
 
         self._reload_bookings(trip["bookings"])
         self._refresh_segments_view(trip)
+        self._sync_stops_listbox_from_trip(trip)
         self.dirty = True
         self._update_dirty_ui()
         self._set_status("Reserva adicionada")
@@ -2156,10 +2279,12 @@ class TripsEditorApp(tk.Tk):
             self._validation_error("Não consegui localizar esta reserva na lista.")
             return
 
+        self._ensure_booking_cities_in_trip(trip, frm, to)
         bookings[row_index] = {"name": name, "from": frm, "to": to}
 
         self._reload_bookings(bookings)
         self._refresh_segments_view(trip)
+        self._sync_stops_listbox_from_trip(trip)
         self.dirty = True
         self._update_dirty_ui()
         self._set_status("Reserva atualizada")
