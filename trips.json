@@ -677,7 +677,6 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Cabrobó-PE",
         "Aracaju-SE"
       ],
       "bookings": [],
@@ -782,9 +781,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Serra Talhada-PE",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Emily",
+          "from": "Serra Talhada-PE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
