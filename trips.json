@@ -591,6 +591,21 @@
           "name": "Samuell",
           "from": "Juazeiro do Norte-CE",
           "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Leonardo",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Leonardo",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Vítor",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
         }
       ],
       "_ui_prefix": "[PRÓXIMA]"
@@ -664,9 +679,28 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
-        "Cedro-CE"
+        "Povoado Km 40-BA",
+        "Paulo Afonso-BA",
+        "Cedro-CE",
+        "Itabaiana-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Kelly",
+          "from": "Itabaiana-SE",
+          "to": "Povoado Km 40-BA"
+        },
+        {
+          "name": "Rubem",
+          "from": "Itabaiana-SE",
+          "to": "Povoado Km 40-BA"
+        },
+        {
+          "name": "José Lucas",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
