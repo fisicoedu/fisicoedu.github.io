@@ -679,10 +679,10 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Itabaiana-SE",
         "Povoado Km 40-BA",
         "Paulo Afonso-BA",
-        "Cedro-CE",
-        "Itabaiana-SE"
+        "Cedro-CE"
       ],
       "bookings": [
         {
