@@ -591,9 +591,24 @@
           "name": "Samuell",
           "from": "Juazeiro do Norte-CE",
           "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Leonardo",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Leonardo",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Vítor",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-05-03-ida",
@@ -624,7 +639,7 @@
           "to": "Juazeiro do Norte-CE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-04-30-volta",
@@ -677,16 +692,9 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Cabrobó-PE",
         "Aracaju-SE"
       ],
-      "bookings": [
-        {
-          "name": "Vilma",
-          "from": "Cabrobó-PE",
-          "to": "Aracaju-SE"
-        }
-      ],
+      "bookings": [],
       "_ui_prefix": ""
     },
     {
@@ -701,11 +709,6 @@
         "Cedro-CE"
       ],
       "bookings": [
-        {
-          "name": "Vilma",
-          "from": "Aracaju-SE",
-          "to": "Cabrobó-PE"
-        },
         {
           "name": "Ericka",
           "from": "Aracaju-SE",
@@ -728,19 +731,6 @@
       "stops": [
         "Cedro-CE",
         "Aracaju-SE"
-      ],
-      "bookings": [],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-05-24-ida",
-      "date": "2026-05-24",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Cedro-CE"
       ],
       "bookings": [],
       "_ui_prefix": ""
@@ -793,9 +783,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Serra Talhada-PE",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Emily",
+          "from": "Serra Talhada-PE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
