@@ -593,7 +593,7 @@
           "to": "Paulo Afonso-BA"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-05-03-ida",
@@ -624,7 +624,7 @@
           "to": "Juazeiro do Norte-CE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-04-30-volta",
@@ -716,19 +716,6 @@
       "stops": [
         "Cedro-CE",
         "Aracaju-SE"
-      ],
-      "bookings": [],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-05-24-ida",
-      "date": "2026-05-24",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Cedro-CE"
       ],
       "bookings": [],
       "_ui_prefix": ""
