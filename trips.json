@@ -608,7 +608,7 @@
           "to": "Aracaju-SE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-05-03-ida",
@@ -701,19 +701,27 @@
           "to": "Paulo Afonso-BA"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
-      "id": "2026-05-14",
-      "date": "2026-05-14",
+      "id": "2026-05-13",
+      "date": "2026-05-13",
       "direction": "volta",
       "title": "Cedro → Aju",
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Brejo Santo-CE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Raniel",
+          "from": "Brejo Santo-CE",
+          "to": "Paulo Afonso-BA"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -724,7 +732,9 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Paulo Afonso-BA",
         "Cabrobó-PE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
       "bookings": [
@@ -737,6 +747,11 @@
           "name": "Ericka",
           "from": "Aracaju-SE",
           "to": "Cabrobó-PE"
+        },
+        {
+          "name": "Raniel",
+          "from": "Paulo Afonso-BA",
+          "to": "Juazeiro do Norte-CE"
         }
       ],
       "_ui_prefix": ""
@@ -749,9 +764,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Juazeiro do Norte-CE",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Raquel",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -763,9 +785,9 @@
       "stops": [
         "Cedro-CE",
         "Ipaumirim-CE",
+        "Belém de São Francisco-PE",
         "Paulo Afonso-BA",
-        "Aracaju-SE",
-        "Belém de São Francisco-PE"
+        "Aracaju-SE"
       ],
       "bookings": [
         {
@@ -777,6 +799,11 @@
           "name": "Cauã",
           "from": "Ipaumirim-CE",
           "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Filipe",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
         }
       ],
       "_ui_prefix": ""
