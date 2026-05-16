@@ -701,7 +701,7 @@
           "to": "Paulo Afonso-BA"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-05-13",
@@ -734,6 +734,7 @@
         "Aracaju-SE",
         "Paulo Afonso-BA",
         "Cabrobó-PE",
+        "Salgueiro-PE",
         "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
@@ -752,9 +753,24 @@
           "name": "Raniel",
           "from": "Paulo Afonso-BA",
           "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Elly",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Patrícia",
+          "from": "Salgueiro-PE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Victória",
+          "from": "Salgueiro-PE",
+          "to": "Juazeiro do Norte-CE"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-05-21-volta",
@@ -765,12 +781,18 @@
       "stops": [
         "Cedro-CE",
         "Juazeiro do Norte-CE",
+        "Floresta-PE",
         "Aracaju-SE"
       ],
       "bookings": [
         {
           "name": "Raquel",
           "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Jorge",
+          "from": "Floresta-PE",
           "to": "Aracaju-SE"
         }
       ],
@@ -784,7 +806,6 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Ipaumirim-CE",
         "Belém de São Francisco-PE",
         "Paulo Afonso-BA",
         "Aracaju-SE"
@@ -794,11 +815,6 @@
           "name": "Júnior",
           "from": "Belém de São Francisco-PE",
           "to": "Aracaju-SE"
-        },
-        {
-          "name": "Cauã",
-          "from": "Ipaumirim-CE",
-          "to": "Paulo Afonso-BA"
         },
         {
           "name": "Filipe",
