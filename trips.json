@@ -951,6 +951,16 @@
           "name": "Socorro",
           "from": "Aracaju-SE",
           "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Maria",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Getulio",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
         }
       ],
       "_ui_prefix": ""
@@ -969,6 +979,16 @@
       "bookings": [
         {
           "name": "Socorro",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Maria",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Getulio",
           "from": "Juazeiro do Norte-CE",
           "to": "Aracaju-SE"
         }
