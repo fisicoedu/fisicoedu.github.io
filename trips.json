@@ -770,7 +770,7 @@
           "to": "Juazeiro do Norte-CE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-05-21-volta",
@@ -806,23 +806,29 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Belém de São Francisco-PE",
+        "Juazeiro do Norte-CE",
+        "Petrolândia-BA",
         "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
       "bookings": [
         {
-          "name": "Júnior",
-          "from": "Belém de São Francisco-PE",
+          "name": "Roama",
+          "from": "Petrolândia-BA",
           "to": "Aracaju-SE"
         },
         {
-          "name": "Filipe",
-          "from": "Paulo Afonso-BA",
+          "name": "Maria",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Júnior",
+          "from": "Belém de São Francisco-PE",
           "to": "Aracaju-SE"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-05-31-ida",
@@ -832,9 +838,22 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Paulo Afonso-BA",
+        "Cabrobó-PE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Kelves",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Adirene",
+          "from": "Aracaju-SE",
+          "to": "Cabrobó-PE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -846,6 +865,7 @@
       "stops": [
         "Cedro-CE",
         "Serra Talhada-PE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
       "bookings": [
@@ -853,6 +873,11 @@
           "name": "Emily",
           "from": "Serra Talhada-PE",
           "to": "Aracaju-SE"
+        },
+        {
+          "name": "Igor",
+          "from": "Cedro-CE",
+          "to": "Paulo Afonso-BA"
         }
       ],
       "_ui_prefix": ""
@@ -891,9 +916,16 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Brejo Santo-CE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Afonsa",
+          "from": "Aracaju-SE",
+          "to": "Brejo Santo-CE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -904,9 +936,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Belém de São Francisco-PE",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Júnior",
+          "from": "Belém de São Francisco-PE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
