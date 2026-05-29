@@ -828,7 +828,7 @@
           "to": "Aracaju-SE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-05-31-ida",
@@ -840,21 +840,33 @@
         "Aracaju-SE",
         "Paulo Afonso-BA",
         "Cabrobó-PE",
+        "Salgueiro-PE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
       "bookings": [
         {
-          "name": "Kelves",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
           "name": "Adirene",
           "from": "Aracaju-SE",
           "to": "Cabrobó-PE"
+        },
+        {
+          "name": "Sintya",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Marcelo",
+          "from": "Paulo Afonso-BA",
+          "to": "Cabrobó-PE"
+        },
+        {
+          "name": "Madalena",
+          "from": "Salgueiro-PE",
+          "to": "Juazeiro do Norte-CE"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-06-04-volta",
@@ -864,6 +876,7 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Brejo Santo-CE",
         "Serra Talhada-PE",
         "Paulo Afonso-BA",
         "Aracaju-SE"
@@ -875,8 +888,13 @@
           "to": "Aracaju-SE"
         },
         {
-          "name": "Igor",
-          "from": "Cedro-CE",
+          "name": "Raquel",
+          "from": "Brejo Santo-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Isabella",
+          "from": "Serra Talhada-PE",
           "to": "Paulo Afonso-BA"
         }
       ],
@@ -890,9 +908,22 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Floresta-PE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Raquel",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Danielle",
+          "from": "Aracaju-SE",
+          "to": "Floresta-PE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -916,6 +947,7 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Floresta-PE",
         "Brejo Santo-CE",
         "Cedro-CE"
       ],
@@ -924,6 +956,11 @@
           "name": "Afonsa",
           "from": "Aracaju-SE",
           "to": "Brejo Santo-CE"
+        },
+        {
+          "name": "Danielle",
+          "from": "Aracaju-SE",
+          "to": "Floresta-PE"
         }
       ],
       "_ui_prefix": ""
@@ -956,9 +993,27 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Paulo Afonso-BA",
+        "Floresta-PE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Irislane",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Irislane",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Danielle",
+          "from": "Aracaju-SE",
+          "to": "Floresta-PE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -969,9 +1024,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Floresta-PE",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Danielle",
+          "from": "Floresta-PE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
