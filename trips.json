@@ -866,7 +866,7 @@
           "to": "Juazeiro do Norte-CE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-06-04-volta",
@@ -896,9 +896,14 @@
           "name": "Isabella",
           "from": "Serra Talhada-PE",
           "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Joelma",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-06-07-ida",
@@ -920,6 +925,11 @@
         },
         {
           "name": "Danielle",
+          "from": "Aracaju-SE",
+          "to": "Floresta-PE"
+        },
+        {
+          "name": "Joelma",
           "from": "Aracaju-SE",
           "to": "Floresta-PE"
         }
