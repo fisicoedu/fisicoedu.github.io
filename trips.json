@@ -913,6 +913,7 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Petrolândia-PE",
         "Floresta-PE",
         "Juazeiro do Norte-CE",
         "Cedro-CE"
@@ -929,9 +930,9 @@
           "to": "Floresta-PE"
         },
         {
-          "name": "Joelma",
+          "name": "Roama",
           "from": "Aracaju-SE",
-          "to": "Floresta-PE"
+          "to": "Petrolândia-PE"
         }
       ],
       "_ui_prefix": ""
