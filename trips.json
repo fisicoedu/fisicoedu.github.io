@@ -951,7 +951,7 @@
           "to": "Cedro-CE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-06-11-volta",
@@ -988,6 +988,7 @@
       "stops": [
         "Aracaju-SE",
         "Paulo Afonso-BA",
+        "Petrolândia-PE",
         "Floresta-PE",
         "Brejo Santo-CE",
         "Cedro-CE"
@@ -1007,9 +1008,19 @@
           "name": "Yhã",
           "from": "Aracaju-SE",
           "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Diego",
+          "from": "Paulo Afonso-BA",
+          "to": "Petrolândia-PE"
+        },
+        {
+          "name": "Arthur",
+          "from": "Floresta-PE",
+          "to": "Cedro-CE"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-06-18-volta",
@@ -1019,13 +1030,38 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Juazeiro do Norte-CE",
+        "Salgueiro-PE",
+        "Cabrobó-PE",
         "Belém de São Francisco-PE",
+        "Floresta-PE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
       "bookings": [
         {
           "name": "Júnior",
           "from": "Belém de São Francisco-PE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Hariany",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Cabrobó"
+        },
+        {
+          "name": "Raquel",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Amanda",
+          "from": "Salgueiro-PE",
+          "to": "Floresta-PE"
+        },
+        {
+          "name": "Júlia Regina",
+          "from": "Paulo Afonso-BA",
           "to": "Aracaju-SE"
         }
       ],
@@ -1130,12 +1166,7 @@
           "to": "Aracaju-SE"
         },
         {
-          "name": "Maria",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Getulio",
+          "name": "Socorro",
           "from": "Juazeiro do Norte-CE",
           "to": "Aracaju-SE"
         }
