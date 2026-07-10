@@ -1020,7 +1020,7 @@
           "to": "Cedro-CE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-06-18-volta",
@@ -1176,6 +1176,123 @@
           "to": "Aracaju-SE"
         }
       ],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-08-02-ida",
+      "date": "2026-08-02",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": "[PRÓXIMA]"
+    },
+    {
+      "id": "2026-08-09-ida",
+      "date": "2026-08-09",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-08-16-ida",
+      "date": "2026-08-16",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-08-30-ida",
+      "date": "2026-08-30",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-09-07-ida",
+      "date": "2026-09-07",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-08-06-volta",
+      "date": "2026-08-06",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-08-13-volta",
+      "date": "2026-08-13",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-08-20-volta",
+      "date": "2026-08-20",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-08-27-volta",
+      "date": "2026-08-27",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
       "_ui_prefix": ""
     }
   ]
