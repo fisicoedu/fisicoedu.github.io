@@ -1294,6 +1294,19 @@
       ],
       "bookings": [],
       "_ui_prefix": ""
+    },
+    {
+      "id": "2026-08-23-ida",
+      "date": "2026-08-23",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
     }
   ]
 }
