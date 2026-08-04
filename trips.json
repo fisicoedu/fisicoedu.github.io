@@ -1219,6 +1219,7 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Cabrobó-PE",
         "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
@@ -1227,6 +1228,11 @@
           "name": "Emmyle",
           "from": "Aracaju-SE",
           "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Vilma",
+          "from": "Aracaju-SE",
+          "to": "Cabrobó-PE"
         }
       ],
       "_ui_prefix": ""
