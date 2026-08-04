@@ -1265,9 +1265,32 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Juazeiro do Norte-CE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Getulio",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Maria",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Jutaí",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Fabiano (enc.)",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": "[PRÓXIMA]"
     },
     {
