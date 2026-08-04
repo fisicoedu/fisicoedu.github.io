@@ -1189,7 +1189,7 @@
         "Cedro-CE"
       ],
       "bookings": [],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-08-09-ida",
@@ -1199,9 +1199,16 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
-        "Cedro-CE"
+        "Cedro-CE",
+        "Milagres-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Melissa",
+          "from": "Aracaju-SE",
+          "to": "Milagres-CE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -1212,9 +1219,16 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Emmyle",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -1254,7 +1268,7 @@
         "Aracaju-SE"
       ],
       "bookings": [],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-08-13-volta",
@@ -1264,9 +1278,28 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Aracaju-SE"
+        "Brejo Santo-CE",
+        "Paulo Afonso-BA",
+        "Aracaju-SE",
+        "Ipaumirim-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Cauã",
+          "from": "Ipaumirim-CE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Cauã",
+          "from": "Ipaumirim-CE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Samuell",
+          "from": "Brejo Santo-CE",
+          "to": "Paulo Afonso-BA"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -1277,9 +1310,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Aracaju-SE"
+        "Aracaju-SE",
+        "Milagres-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Melissa",
+          "from": "Milagres-CE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -1316,9 +1356,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Serra Talhada-PE",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Emily",
+          "from": "Serra Talhada-PE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
