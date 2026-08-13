@@ -1233,6 +1233,11 @@
           "name": "Vilma",
           "from": "Aracaju-SE",
           "to": "Cabrobó-PE"
+        },
+        {
+          "name": "Vítor",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
         }
       ],
       "_ui_prefix": ""
@@ -1297,7 +1302,7 @@
           "to": "Aracaju-SE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-08-13-volta",
@@ -1329,7 +1334,7 @@
           "to": "Paulo Afonso-BA"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-08-20-volta",
