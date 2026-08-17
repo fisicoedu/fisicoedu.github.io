@@ -1240,7 +1240,7 @@
           "to": "Juazeiro do Norte-CE"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-08-30-ida",
@@ -1334,7 +1334,7 @@
           "to": "Paulo Afonso-BA"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-08-20-volta",
@@ -1364,9 +1364,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Aracaju-SE"
+        "Aracaju-SE",
+        "Milagres-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Neide",
+          "from": "Milagres-CE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -1377,9 +1384,22 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Paulo Afonso-BA",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Raquel",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "José Lucas",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
