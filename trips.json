@@ -34,6 +34,9 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Floresta-PE",
+        "Belém de São Francisco-PE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
       "bookings": [
@@ -46,6 +49,11 @@
           "name": "Jéssica",
           "from": "Aracaju-SE",
           "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Júnior",
+          "from": "Aracaju-SE",
+          "to": "Belém de São Francisco-PE"
         }
       ],
       "_ui_prefix": ""
@@ -59,9 +67,9 @@
       "stops": [
         "Cedro-CE",
         "Juazeiro do Norte-CE",
+        "Belém de São Francisco-PE",
         "Paulo Afonso-BA",
-        "Aracaju-SE",
-        "Belém de São Francisco-PE"
+        "Aracaju-SE"
       ],
       "bookings": [
         {
