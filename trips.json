@@ -1,41 +1,6 @@
 {
   "trips": [
     {
-      "id": "2026-04-05-ida",
-      "date": "2026-04-05",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Juazeiro do Norte-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Anderson",
-          "from": "Aracaju-SE",
-          "to": "Ipaumirim-CE"
-        },
-        {
-          "name": "Anderson",
-          "from": "Aracaju-SE",
-          "to": "Ipaumirim-CE"
-        },
-        {
-          "name": "Anderson",
-          "from": "Aracaju-SE",
-          "to": "Ipaumirim-CE"
-        },
-        {
-          "name": "Anderson",
-          "from": "Aracaju-SE",
-          "to": "Ipaumirim-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
       "id": "2026-10-08",
       "date": "2026-10-08",
       "direction": "volta",
