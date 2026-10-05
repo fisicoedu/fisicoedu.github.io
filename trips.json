@@ -36,7 +36,7 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2026-10-08_volta_cedro-ce-aracaju-se",
+      "id": "2026-10-08",
       "date": "2026-10-08",
       "direction": "volta",
       "title": "Cedro → Aju",
@@ -62,7 +62,7 @@
       "_ui_prefix": "[PRÓXIMA]"
     },
     {
-      "id": "2026-10-12_ida_aracaju-se-juazeiro-do-norte-ce",
+      "id": "2026-10-12",
       "date": "2026-10-12",
       "direction": "ida",
       "title": "Aju → Cedro",
@@ -86,7 +86,7 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2026-10-15_volta_cedro-ce-aracaju-se",
+      "id": "2026-10-15",
       "date": "2026-10-15",
       "direction": "volta",
       "title": "Cedro → Aju",
@@ -128,7 +128,7 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2026-10-18_ida_aracaju-se-juazeiro-do-norte-ce",
+      "id": "2026-10-18",
       "date": "2026-10-18",
       "direction": "ida",
       "title": "Aju → Cedro",
@@ -160,7 +160,7 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2026-10-21_volta_cedro-ce-aracaju-se",
+      "id": "2026-10-21",
       "date": "2026-10-21",
       "direction": "volta",
       "title": "Cedro → Aju",
@@ -186,8 +186,8 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2025-10-25_ida_aracaju-se-cedro-ce",
-      "date": "2025-10-25",
+      "id": "2026-10-25",
+      "date": "2026-10-25",
       "direction": "ida",
       "title": "Aju → Cedro",
       "capacity": 3,
@@ -235,8 +235,8 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2025-11-02",
-      "date": "2025-11-02",
+      "id": "2026-11-02",
+      "date": "2026-11-02",
       "direction": "ida",
       "title": "Aju → Cedro",
       "capacity": 3,
@@ -261,8 +261,8 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2025-11-08",
-      "date": "2025-11-08",
+      "id": "2026-11-08",
+      "date": "2026-11-08",
       "direction": "ida",
       "title": "Aju → Cedro",
       "capacity": 3,
@@ -287,8 +287,8 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2025-11-15",
-      "date": "2025-11-15",
+      "id": "2026-11-15",
+      "date": "2026-11-15",
       "direction": "ida",
       "title": "Aju → Cedro",
       "capacity": 3,
@@ -313,8 +313,8 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2025-11-22",
-      "date": "2025-11-22",
+      "id": "2026-11-22",
+      "date": "2026-11-22",
       "direction": "ida",
       "title": "Aju → Cedro",
       "capacity": 3,
@@ -339,8 +339,8 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2025-11-29",
-      "date": "2025-11-29",
+      "id": "2026-11-29",
+      "date": "2026-11-29",
       "direction": "ida",
       "title": "Aju → Cedro",
       "capacity": 3,
