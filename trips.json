@@ -1,450 +1,6 @@
 {
   "trips": [
     {
-      "id": "2026-02-01-ida",
-      "date": "2026-02-01",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Petrolândia-PE",
-        "Floresta-PE",
-        "Salgueiro-PE",
-        "Juazeiro-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Júnior",
-          "from": "Aracaju-SE",
-          "to": "Floresta-PE"
-        },
-        {
-          "name": "Leandro",
-          "from": "Aracaju-SE",
-          "to": "Salgueiro-PE"
-        },
-        {
-          "name": "Rebeca",
-          "from": "Petrolândia-PE",
-          "to": "Floresta-PE"
-        },
-        {
-          "name": "Fabíola",
-          "from": "Salgueiro-PE",
-          "to": "Juazeiro-CE"
-        },
-        {
-          "name": "Fabíola",
-          "from": "Salgueiro-PE",
-          "to": "Juazeiro-CE"
-        },
-        {
-          "name": "Fabíola",
-          "from": "Salgueiro-PE",
-          "to": "Juazeiro-CE"
-        },
-        {
-          "name": "Arthur",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-02-04-volta",
-      "date": "2026-02-04",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Cabrobó-PE",
-        "Paulo Afonso-BA",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Daniel",
-          "from": "Cabrobó-PE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Vilma",
-          "from": "Cabrobó-PE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Thaiani",
-          "from": "Paulo Afonso-SE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-02-08-ida",
-      "date": "2026-02-08",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Cabrobó-PE",
-        "Salgueiro-PE",
-        "Juazeiro-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Vilma",
-          "from": "Aracaju-SE",
-          "to": "Cabrobó-PE"
-        },
-        {
-          "name": "Messias",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro-CE"
-        },
-        {
-          "name": "Hemory",
-          "from": "Aracaju-SE",
-          "to": "Salgueiro-PE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-02-11-volta",
-      "date": "2026-02-11",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Serra Talhada-PE",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Jairan",
-          "from": "Serra Talhada-PE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Jairan",
-          "from": "Serra Talhada-PE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Emily",
-          "from": "Serra Talhada-PE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-02-22-ida",
-      "date": "2026-02-22",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Juazeiro-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Sâmylla",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro-CE"
-        },
-        {
-          "name": "Getulio",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro-CE"
-        },
-        {
-          "name": "Maria",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-02-25-volta",
-      "date": "2026-02-25",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Juazeiro-CE",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Samuel",
-          "from": "Juazeiro-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Getulio",
-          "from": "Juazeiro-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Maria",
-          "from": "Juazeiro-CE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-03-08-ida",
-      "date": "2026-03-08",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Povoado Km 40",
-        "Paulo Afonso-BA",
-        "Petrolândia-PE",
-        "Floresta-PE",
-        "Serra Talhada-PE",
-        "Brejo Santo-CE",
-        "Juazeiro do Norte-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Thiago",
-          "from": "Aracaju-SE",
-          "to": "Serra Talhada-PE"
-        },
-        {
-          "name": "Ayana",
-          "from": "Serra Talhada-PE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Almir",
-          "from": "Aracaju-SE",
-          "to": "Povoado Km 40"
-        },
-        {
-          "name": "Maria",
-          "from": "Serra Talhada-PE",
-          "to": "Brejo Santo-CE"
-        },
-        {
-          "name": "Claudemir",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Víctor",
-          "from": "Floresta-PE",
-          "to": "Serra Talhada-PE"
-        },
-        {
-          "name": "Natália",
-          "from": "Petrolândia-PE",
-          "to": "Floresta-PE"
-        },
-        {
-          "name": "Dominique",
-          "from": "Paulo Afonso-BA",
-          "to": "Serra Talhada-PE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-03-11-volta",
-      "date": "2026-03-11",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Juazeiro do Norte-CE",
-        "Cabrobó-PE",
-        "Belém de São Francisco-PE",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Genisson",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Júnior",
-          "from": "Belém de São Francisco-PE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Vilma",
-          "from": "Cabrobó-PE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-03-15-ida",
-      "date": "2026-03-15",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Belém de São Francisco-PE",
-        "Cabrobó-PE",
-        "Milagres-CE",
-        "Povoado Mangabeira-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Melissa",
-          "from": "Aracaju-SE",
-          "to": "Milagres-CE"
-        },
-        {
-          "name": "Vilma",
-          "from": "Aracaju-SE",
-          "to": "Cabrobó-PE"
-        },
-        {
-          "name": "Júnior",
-          "from": "Aracaju-SE",
-          "to": "Belém de São Francisco-PE"
-        },
-        {
-          "name": "Atos",
-          "from": "Salgueiro-PE",
-          "to": "Povoado Mangabeira-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-03-25-volta",
-      "date": "2026-03-25",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Juazeiro do Norte-CE",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Emmyle (dog)",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-03-29-ida",
-      "date": "2026-03-29",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Salgueiro-PE",
-        "Lavras da Mangabeira-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Helen",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Mateus",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "José Luiz",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Mácia",
-          "from": "Floresta-PE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "João",
-          "from": "Floresta-PE",
-          "to": "Juazeiro do Norte-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-04-02-volta",
-      "date": "2026-04-02",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Ipaumirim-CE",
-        "Paulo Afonso-BA",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Anderson",
-          "from": "Ipaumirim-CE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Anderson",
-          "from": "Ipaumirim-CE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Jhuly Anne",
-          "from": "Paulo Afonso-BA",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Jhuly Anne",
-          "from": "Paulo Afonso-BA",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Anderson",
-          "from": "Ipaumirim-CE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Anderson",
-          "from": "Ipaumirim-CE",
-          "to": "Paulo Afonso-BA"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
       "id": "2026-04-05-ida",
       "date": "2026-04-05",
       "direction": "ida",
@@ -480,41 +36,8 @@
       "_ui_prefix": ""
     },
     {
-      "id": "2026-04-08-volta",
-      "date": "2026-04-08",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Paulo Afonso-BA",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Samuell",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Paulo Afonso-BA"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-04-12-ida",
-      "date": "2026-04-12",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Cedro-CE"
-      ],
-      "bookings": [],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-04-16-volta",
-      "date": "2026-04-16",
+      "id": "2026-10-08_volta_cedro-ce-aracaju-se",
+      "date": "2026-10-08",
       "direction": "volta",
       "title": "Cedro → Aju",
       "capacity": 3,
@@ -526,725 +49,21 @@
       ],
       "bookings": [
         {
-          "name": "Júnior",
-          "from": "Belém de São Francisco-PE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Genisson",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Melissa",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-04-26-ida",
-      "date": "2026-04-26",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Brejo Santo-CE",
-        "Juazeiro do Norte-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Júnior",
-          "from": "Aracaju-SE",
-          "to": "Belém de São Francisco-PE"
-        },
-        {
-          "name": "Vítor",
-          "from": "Aracaju-SE",
+          "name": "Párley",
+          "from": "Cedro-CE",
           "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Caio",
-          "from": "Aracaju-SE",
-          "to": "Brejo Santo-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-05-07-volta",
-      "date": "2026-05-07",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Juazeiro do Norte-CE",
-        "Paulo Afonso-BA",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Samuell",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Leonardo",
-          "from": "Paulo Afonso-BA",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Leonardo",
-          "from": "Paulo Afonso-BA",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Vítor",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-05-03-ida",
-      "date": "2026-05-03",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Paulo Afonso-BA",
-        "Juazeiro do Norte-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Raquel",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Samuell",
-          "from": "Paulo Afonso-BA",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Samuell",
-          "from": "Paulo Afonso-BA",
-          "to": "Juazeiro do Norte-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-04-30-volta",
-      "date": "2026-04-30",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Juazeiro do Norte-CE",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Ana",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Ana",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Raquel",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-05-10-ida",
-      "date": "2026-05-10",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Itabaiana-SE",
-        "Povoado Km 40-BA",
-        "Paulo Afonso-BA",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Kelly",
-          "from": "Itabaiana-SE",
-          "to": "Povoado Km 40-BA"
-        },
-        {
-          "name": "Rubem",
-          "from": "Itabaiana-SE",
-          "to": "Povoado Km 40-BA"
-        },
-        {
-          "name": "José Lucas",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-05-13",
-      "date": "2026-05-13",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Brejo Santo-CE",
-        "Paulo Afonso-BA",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Raniel",
-          "from": "Brejo Santo-CE",
-          "to": "Paulo Afonso-BA"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-05-17-ida",
-      "date": "2026-05-17",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Paulo Afonso-BA",
-        "Cabrobó-PE",
-        "Salgueiro-PE",
-        "Juazeiro do Norte-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Ericka",
-          "from": "Aracaju-SE",
-          "to": "Cabrobó-PE"
-        },
-        {
-          "name": "Ericka",
-          "from": "Aracaju-SE",
-          "to": "Cabrobó-PE"
-        },
-        {
-          "name": "Raniel",
-          "from": "Paulo Afonso-BA",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Elly",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Patrícia",
-          "from": "Salgueiro-PE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Victória",
-          "from": "Salgueiro-PE",
-          "to": "Juazeiro do Norte-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-05-21-volta",
-      "date": "2026-05-21",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Juazeiro do Norte-CE",
-        "Floresta-PE",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Raquel",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Jorge",
-          "from": "Floresta-PE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-05-28-volta",
-      "date": "2026-05-28",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Juazeiro do Norte-CE",
-        "Petrolândia-BA",
-        "Paulo Afonso-BA",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Roama",
-          "from": "Petrolândia-BA",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Maria",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
         },
         {
           "name": "Júnior",
           "from": "Belém de São Francisco-PE",
           "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-05-31-ida",
-      "date": "2026-05-31",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Paulo Afonso-BA",
-        "Cabrobó-PE",
-        "Salgueiro-PE",
-        "Juazeiro do Norte-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Adirene",
-          "from": "Aracaju-SE",
-          "to": "Cabrobó-PE"
-        },
-        {
-          "name": "Sintya",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Marcelo",
-          "from": "Paulo Afonso-BA",
-          "to": "Cabrobó-PE"
-        },
-        {
-          "name": "Madalena",
-          "from": "Salgueiro-PE",
-          "to": "Juazeiro do Norte-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-06-04-volta",
-      "date": "2026-06-04",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Brejo Santo-CE",
-        "Serra Talhada-PE",
-        "Paulo Afonso-BA",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Emily",
-          "from": "Serra Talhada-PE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Raquel",
-          "from": "Brejo Santo-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Isabella",
-          "from": "Serra Talhada-PE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Joelma",
-          "from": "Paulo Afonso-BA",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-06-07-ida",
-      "date": "2026-06-07",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Petrolândia-PE",
-        "Floresta-PE",
-        "Salgueiro-PE",
-        "Juazeiro do Norte-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Raquel",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Danielle",
-          "from": "Aracaju-SE",
-          "to": "Floresta-PE"
-        },
-        {
-          "name": "Roama",
-          "from": "Aracaju-SE",
-          "to": "Petrolândia-PE"
-        },
-        {
-          "name": "Amanda",
-          "from": "Floresta-PE",
-          "to": "Salgueiro-PE"
-        },
-        {
-          "name": "Taísa",
-          "from": "Salgueiro-PE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Hudson",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Cedro-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-06-11-volta",
-      "date": "2026-06-11",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Cabrobó-PE",
-        "Floresta-PE",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Ericka",
-          "from": "Cabrobó-PE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Danielle",
-          "from": "Floresta-PE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-06-14-ida",
-      "date": "2026-06-14",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Paulo Afonso-BA",
-        "Petrolândia-PE",
-        "Floresta-PE",
-        "Brejo Santo-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Afonsa",
-          "from": "Aracaju-SE",
-          "to": "Brejo Santo-CE"
-        },
-        {
-          "name": "Danielle",
-          "from": "Aracaju-SE",
-          "to": "Floresta-PE"
-        },
-        {
-          "name": "Yhã",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Diego",
-          "from": "Paulo Afonso-BA",
-          "to": "Petrolândia-PE"
-        },
-        {
-          "name": "Arthur",
-          "from": "Floresta-PE",
-          "to": "Cedro-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-06-18-volta",
-      "date": "2026-06-18",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Juazeiro do Norte-CE",
-        "Salgueiro-PE",
-        "Cabrobó-PE",
-        "Belém de São Francisco-PE",
-        "Floresta-PE",
-        "Paulo Afonso-BA",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Júnior",
-          "from": "Belém de São Francisco-PE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Hariany",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Cabrobó"
-        },
-        {
-          "name": "Raquel",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Amanda",
-          "from": "Salgueiro-PE",
-          "to": "Floresta-PE"
-        },
-        {
-          "name": "Júlia Regina",
-          "from": "Paulo Afonso-BA",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Fabiano (enc.)",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-06-21-ida",
-      "date": "2026-06-21",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Paulo Afonso-BA",
-        "Floresta-PE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Irislane",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Irislane",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Danielle",
-          "from": "Aracaju-SE",
-          "to": "Floresta-PE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-06-24-volta",
-      "date": "2026-06-24",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Floresta-PE",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Danielle",
-          "from": "Floresta-PE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-06-28-ida",
-      "date": "2026-06-28",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Juazeiro do Norte-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Socorro",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Maria",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Getulio",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-07-04-volta",
-      "date": "2026-07-04",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Juazeiro do Norte-CE",
-        "Aracaju-SE"
-      ],
-      "bookings": [
-        {
-          "name": "Socorro",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Socorro",
-          "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-08-02-ida",
-      "date": "2026-08-02",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Cedro-CE"
-      ],
-      "bookings": [],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-08-09-ida",
-      "date": "2026-08-09",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Cedro-CE",
-        "Milagres-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Melissa",
-          "from": "Aracaju-SE",
-          "to": "Milagres-CE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-08-16-ida",
-      "date": "2026-08-16",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Cabrobó-PE",
-        "Juazeiro do Norte-CE",
-        "Cedro-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Emmyle",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Vilma",
-          "from": "Aracaju-SE",
-          "to": "Cabrobó-PE"
-        },
-        {
-          "name": "Vítor",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
         }
       ],
       "_ui_prefix": "[PRÓXIMA]"
     },
     {
-      "id": "2026-08-30-ida",
-      "date": "2026-08-30",
+      "id": "2026-10-12_ida_aracaju-se-juazeiro-do-norte-ce",
+      "date": "2026-10-12",
       "direction": "ida",
       "title": "Aju → Cedro",
       "capacity": 3,
@@ -1252,25 +71,23 @@
         "Aracaju-SE",
         "Cedro-CE"
       ],
-      "bookings": [],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-09-07-ida",
-      "date": "2026-09-07",
-      "direction": "ida",
-      "title": "Aju → Cedro",
-      "capacity": 3,
-      "stops": [
-        "Aracaju-SE",
-        "Cedro-CE"
+      "bookings": [
+        {
+          "name": "Mariana",
+          "from": "Aracaju-SE",
+          "to": "Floresta-PE"
+        },
+        {
+          "name": "Jéssica",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        }
       ],
-      "bookings": [],
       "_ui_prefix": ""
     },
     {
-      "id": "2026-08-06-volta",
-      "date": "2026-08-06",
+      "id": "2026-10-15_volta_cedro-ce-aracaju-se",
+      "date": "2026-10-15",
       "direction": "volta",
       "title": "Cedro → Aju",
       "capacity": 3,
@@ -1278,35 +95,73 @@
         "Cedro-CE",
         "Juazeiro do Norte-CE",
         "Paulo Afonso-BA",
-        "Aracaju-SE"
+        "Aracaju-SE",
+        "Belém de São Francisco-PE"
       ],
       "bookings": [
         {
-          "name": "Getulio",
+          "name": "Sandro",
           "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
+          "to": "Paulo Afonso-BA"
         },
         {
-          "name": "Maria",
+          "name": "Sandro",
           "from": "Juazeiro do Norte-CE",
-          "to": "Aracaju-SE"
+          "to": "Paulo Afonso-BA"
         },
         {
-          "name": "Jutaí",
+          "name": "Nicole Nayara",
           "from": "Paulo Afonso-BA",
           "to": "Aracaju-SE"
         },
         {
-          "name": "Fabiano (enc.)",
-          "from": "Juazeiro do Norte-CE",
+          "name": "Nicole Nayara",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Nicole Nayara",
+          "from": "Paulo Afonso-BA",
           "to": "Aracaju-SE"
         }
       ],
       "_ui_prefix": ""
     },
     {
-      "id": "2026-08-13-volta",
-      "date": "2026-08-13",
+      "id": "2026-10-18_ida_aracaju-se-juazeiro-do-norte-ce",
+      "date": "2026-10-18",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Paulo Afonso-BA",
+        "Petrolândia-PE",
+        "Juazeiro do Norte-CE",
+        "Cedro-CE"
+      ],
+      "bookings": [
+        {
+          "name": "Everton",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Raphaela",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Jhonnas",
+          "from": "Petrolândia-PE",
+          "to": "Juazeiro do Norte-CE"
+        }
+      ],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-10-21_volta_cedro-ce-aracaju-se",
+      "date": "2026-10-21",
       "direction": "volta",
       "title": "Cedro → Aju",
       "capacity": 3,
@@ -1314,117 +169,269 @@
         "Cedro-CE",
         "Brejo Santo-CE",
         "Paulo Afonso-BA",
-        "Aracaju-SE",
-        "Ipaumirim-CE"
+        "Aracaju-SE"
       ],
       "bookings": [
         {
-          "name": "Cauã",
-          "from": "Ipaumirim-CE",
+          "name": "Igor",
+          "from": "Cedro-CE",
           "to": "Paulo Afonso-BA"
         },
         {
-          "name": "Cauã",
-          "from": "Ipaumirim-CE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
-          "name": "Samuell",
+          "name": "Jéssica",
           "from": "Brejo Santo-CE",
-          "to": "Paulo Afonso-BA"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-08-20-volta",
-      "date": "2026-08-20",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Aracaju-SE",
-        "Milagres-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Melissa",
-          "from": "Milagres-CE",
           "to": "Aracaju-SE"
         }
       ],
       "_ui_prefix": ""
     },
     {
-      "id": "2026-08-27-volta",
-      "date": "2026-08-27",
-      "direction": "volta",
-      "title": "Cedro → Aju",
-      "capacity": 3,
-      "stops": [
-        "Cedro-CE",
-        "Aracaju-SE",
-        "Milagres-CE"
-      ],
-      "bookings": [
-        {
-          "name": "Neide",
-          "from": "Milagres-CE",
-          "to": "Aracaju-SE"
-        }
-      ],
-      "_ui_prefix": ""
-    },
-    {
-      "id": "2026-08-23-ida",
-      "date": "2026-08-23",
+      "id": "2025-10-25_ida_aracaju-se-cedro-ce",
+      "date": "2025-10-25",
       "direction": "ida",
       "title": "Aju → Cedro",
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
         "Paulo Afonso-BA",
-        "Juazeiro do Norte-CE",
+        "Salgueiro-PE",
         "Cedro-CE"
       ],
       "bookings": [
         {
-          "name": "Raquel",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "José Lucas",
+          "name": "Kamila",
           "from": "Aracaju-SE",
           "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Melissa",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
+        },
+        {
+          "name": "Melissa",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
+        },
+        {
+          "name": "Igor",
+          "from": "Paulo Afonso-BA",
+          "to": "Cedro-CE"
         }
       ],
       "_ui_prefix": ""
     },
     {
-      "id": "2026-09-03-volta",
-      "date": "2026-09-03",
+      "id": "2026-10-28",
+      "date": "2026-10-28",
       "direction": "volta",
       "title": "Cedro → Aju",
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Serra Talhada-PE",
         "Aracaju-SE"
       ],
-      "bookings": [
-        {
-          "name": "Emily",
-          "from": "Serra Talhada-PE",
-          "to": "Aracaju-SE"
-        }
-      ],
+      "bookings": [],
       "_ui_prefix": ""
     },
     {
-      "id": "2026-09-10-volta",
-      "date": "2026-09-10",
+      "id": "2025-11-02",
+      "date": "2025-11-02",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-11-05",
+      "date": "2026-11-05",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2025-11-08",
+      "date": "2025-11-08",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-11-12",
+      "date": "2026-11-12",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2025-11-15",
+      "date": "2025-11-15",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-11-19",
+      "date": "2026-11-19",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2025-11-22",
+      "date": "2025-11-22",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-11-26",
+      "date": "2026-11-26",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2025-11-29",
+      "date": "2025-11-29",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-12-03",
+      "date": "2026-12-03",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-12-06",
+      "date": "2026-12-06",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-12-10",
+      "date": "2026-12-10",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-12-13",
+      "date": "2026-12-13",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-12-17",
+      "date": "2026-12-17",
+      "direction": "volta",
+      "title": "Cedro → Aju",
+      "capacity": 3,
+      "stops": [
+        "Cedro-CE",
+        "Aracaju-SE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-12-20",
+      "date": "2026-12-20",
+      "direction": "ida",
+      "title": "Aju → Cedro",
+      "capacity": 3,
+      "stops": [
+        "Aracaju-SE",
+        "Cedro-CE"
+      ],
+      "bookings": [],
+      "_ui_prefix": ""
+    },
+    {
+      "id": "2026-12-24",
+      "date": "2026-12-24",
       "direction": "volta",
       "title": "Cedro → Aju",
       "capacity": 3,
