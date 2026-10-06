@@ -9,8 +9,9 @@
       "stops": [
         "Cedro-CE",
         "Juazeiro do Norte-CE",
-        "Belém de São Francisco-PE",
-        "Aracaju-SE"
+        "Petrolândia-PE",
+        "Aracaju-SE",
+        "Belém de São Francisco-PE"
       ],
       "bookings": [
         {
@@ -22,6 +23,11 @@
           "name": "Júnior",
           "from": "Belém de São Francisco-PE",
           "to": "Aracaju-SE"
+        },
+        {
+          "name": "Jhonnas",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Petrolândia-PE"
         }
       ],
       "_ui_prefix": "[PRÓXIMA]"
