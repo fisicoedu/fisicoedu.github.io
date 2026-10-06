@@ -110,6 +110,8 @@
         "Aracaju-SE",
         "Paulo Afonso-BA",
         "Petrolândia-PE",
+        "Floresta-PE",
+        "Salgueiro-PE",
         "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
@@ -128,6 +130,11 @@
           "name": "Jhonnas",
           "from": "Petrolândia-PE",
           "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Amanda",
+          "from": "Floresta-PE",
+          "to": "Salgueiro-PE"
         }
       ],
       "_ui_prefix": ""
@@ -254,9 +261,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Serra Talhada-PE",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Emly",
+          "from": "Serra Talhada-PE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
