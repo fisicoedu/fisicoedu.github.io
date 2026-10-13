@@ -283,13 +283,7 @@
         "Serra Talhada-PE",
         "Aracaju-SE"
       ],
-      "bookings": [
-        {
-          "name": "Emly",
-          "from": "Serra Talhada-PE",
-          "to": "Aracaju-SE"
-        }
-      ],
+      "bookings": [],
       "_ui_prefix": ""
     },
     {
