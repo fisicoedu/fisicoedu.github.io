@@ -131,6 +131,11 @@
           "name": "Jhonnas",
           "from": "Petrolândia-PE",
           "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Raquel",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
         }
       ],
       "_ui_prefix": ""
