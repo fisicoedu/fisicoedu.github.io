@@ -30,7 +30,7 @@
           "to": "Petrolândia-PE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-10-12",
@@ -104,7 +104,7 @@
           "to": "Aracaju-SE"
         }
       ],
-      "_ui_prefix": ""
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-10-18",
@@ -123,11 +123,6 @@
       ],
       "bookings": [
         {
-          "name": "Everton",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
           "name": "Raphaela",
           "from": "Aracaju-SE",
           "to": "Paulo Afonso-BA"
@@ -136,11 +131,6 @@
           "name": "Jhonnas",
           "from": "Petrolândia-PE",
           "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Amanda",
-          "from": "Floresta-PE",
-          "to": "Salgueiro-PE"
         }
       ],
       "_ui_prefix": ""
@@ -153,7 +143,7 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Brejo Santo-CE",
+        "Juazeiro do Norte-CE",
         "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
@@ -165,7 +155,7 @@
         },
         {
           "name": "Jéssica",
-          "from": "Brejo Santo-CE",
+          "from": "Juazeiro do Norte-CE",
           "to": "Aracaju-SE"
         }
       ],
@@ -228,9 +218,27 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Paulo Afonso-BA",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Maria",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Getulio",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Joelma",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -287,9 +295,16 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Paulo Afonso-BA",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Maurício",
+          "from": "Aracaju-SE",
+          "to": "Paulo Afonso-BA"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -300,9 +315,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Maxsuel",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -339,9 +361,21 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Giulia",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Giulia",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -417,9 +451,26 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Adriana",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Adriana",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Adriana",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
