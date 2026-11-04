@@ -328,18 +328,24 @@
         "Aracaju-SE",
         "Paulo Afonso-BA",
         "Salgueiro-PE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
       "bookings": [
         {
-          "name": "Maurício",
-          "from": "Aracaju-SE",
-          "to": "Paulo Afonso-BA"
-        },
-        {
           "name": "João",
           "from": "Aracaju-SE",
           "to": "Salgueiro-PE"
+        },
+        {
+          "name": "Adriana",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Adriana",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
         }
       ],
       "_ui_prefix": ""
