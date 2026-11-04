@@ -104,7 +104,7 @@
           "to": "Aracaju-SE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-10-18",
@@ -254,10 +254,27 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Juazeiro do Norte-CE",
         "Aracaju-SE"
       ],
-      "bookings": [],
-      "_ui_prefix": ""
+      "bookings": [
+        {
+          "name": "Lucianne",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Lucianne",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Lucianne",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        }
+      ],
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-11-08",
@@ -267,9 +284,24 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Paulo Afonso-BA",
+        "Salgueiro-PE",
+        "Brejo Santo-CE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Pedro",
+          "from": "Paulo Afonso-BA",
+          "to": "Salgueiro-PE"
+        },
+        {
+          "name": "Arthur",
+          "from": "Brejo Santo-CE",
+          "to": "Cedro-CE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -295,6 +327,7 @@
       "stops": [
         "Aracaju-SE",
         "Paulo Afonso-BA",
+        "Salgueiro-PE",
         "Cedro-CE"
       ],
       "bookings": [
@@ -302,6 +335,11 @@
           "name": "Maurício",
           "from": "Aracaju-SE",
           "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "João",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
         }
       ],
       "_ui_prefix": ""
@@ -317,13 +355,7 @@
         "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
-      "bookings": [
-        {
-          "name": "Maxsuel",
-          "from": "Paulo Afonso-BA",
-          "to": "Aracaju-SE"
-        }
-      ],
+      "bookings": [],
       "_ui_prefix": ""
     },
     {
@@ -347,9 +379,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Salgueiro-PE",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Lara",
+          "from": "Salgueiro-PE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -360,6 +399,7 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Salgueiro-PE",
         "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
@@ -373,6 +413,11 @@
           "name": "Giulia",
           "from": "Aracaju-SE",
           "to": "Juazeiro do Norte-CE"
+        },
+        {
+          "name": "Lara",
+          "from": "Aracaju-SE",
+          "to": "Salgueiro-PE"
         }
       ],
       "_ui_prefix": ""
@@ -411,9 +456,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Vítor",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -424,9 +476,16 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Juazeiro do Norte-CE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Socorro",
+          "from": "Aracaju-SE",
+          "to": "Juazeiro do Norte-CE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -437,9 +496,16 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Juazeiro do Norte-CE",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Socorro",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -482,7 +548,23 @@
         "Cedro-CE",
         "Aracaju-SE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Branca",
+          "from": "Cedro-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Branca",
+          "from": "Cedro-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Branca",
+          "from": "Cedro-CE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     }
   ]
