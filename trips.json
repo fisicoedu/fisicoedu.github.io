@@ -338,7 +338,7 @@
           "to": "Aracaju-SE"
         }
       ],
-      "_ui_prefix": "[PRÓXIMA]"
+      "_ui_prefix": ""
     },
     {
       "id": "2026-11-15",
@@ -413,10 +413,23 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
+        "Floresta-PE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
-      "bookings": [],
-      "_ui_prefix": ""
+      "bookings": [
+        {
+          "name": "José",
+          "from": "Paulo Afonso-BA",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Danielle",
+          "from": "Floresta-PE",
+          "to": "Aracaju-SE"
+        }
+      ],
+      "_ui_prefix": "[PRÓXIMA]"
     },
     {
       "id": "2026-11-29",
@@ -457,12 +470,24 @@
       "stops": [
         "Cedro-CE",
         "Juazeiro do Norte-CE",
+        "Floresta-PE",
+        "Paulo Afonso-BA",
         "Aracaju-SE"
       ],
       "bookings": [
         {
           "name": "Socorro",
           "from": "Juazeiro do Norte-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Marina",
+          "from": "Juazeiro do Norte-CE",
+          "to": "Paulo Afonso-BA"
+        },
+        {
+          "name": "Joelma",
+          "from": "Floresta-PE",
           "to": "Aracaju-SE"
         }
       ],
@@ -476,9 +501,16 @@
       "capacity": 3,
       "stops": [
         "Aracaju-SE",
+        "Floresta-PE",
         "Cedro-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Joelma",
+          "from": "Aracaju-SE",
+          "to": "Floresta-PE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
@@ -522,9 +554,26 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Aracaju-SE"
+        "Aracaju-SE",
+        "Milagres-CE"
       ],
-      "bookings": [],
+      "bookings": [
+        {
+          "name": "Melissa",
+          "from": "Milagres-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Melissa",
+          "from": "Milagres-CE",
+          "to": "Aracaju-SE"
+        },
+        {
+          "name": "Melissa",
+          "from": "Milagres-CE",
+          "to": "Aracaju-SE"
+        }
+      ],
       "_ui_prefix": ""
     },
     {
