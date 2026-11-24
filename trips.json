@@ -9,9 +9,9 @@
       "stops": [
         "Cedro-CE",
         "Juazeiro do Norte-CE",
+        "Belém de São Francisco-PE",
         "Petrolândia-PE",
-        "Aracaju-SE",
-        "Belém de São Francisco-PE"
+        "Aracaju-SE"
       ],
       "bookings": [
         {
@@ -446,12 +446,8 @@
         {
           "name": "Giulia",
           "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Giulia",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
+          "to": "Juazeiro do Norte-CE",
+          "seats": 2
         },
         {
           "name": "Socorro",
@@ -554,24 +550,15 @@
       "capacity": 3,
       "stops": [
         "Cedro-CE",
-        "Aracaju-SE",
-        "Milagres-CE"
+        "Milagres-CE",
+        "Aracaju-SE"
       ],
       "bookings": [
         {
           "name": "Melissa",
           "from": "Milagres-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Melissa",
-          "from": "Milagres-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Melissa",
-          "from": "Milagres-CE",
-          "to": "Aracaju-SE"
+          "to": "Aracaju-SE",
+          "seats": 3
         }
       ],
       "_ui_prefix": ""
@@ -591,17 +578,8 @@
         {
           "name": "Adriana",
           "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Adriana",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
-        },
-        {
-          "name": "Adriana",
-          "from": "Aracaju-SE",
-          "to": "Juazeiro do Norte-CE"
+          "to": "Juazeiro do Norte-CE",
+          "seats": 3
         }
       ],
       "_ui_prefix": ""
@@ -620,17 +598,8 @@
         {
           "name": "Branca",
           "from": "Cedro-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Branca",
-          "from": "Cedro-CE",
-          "to": "Aracaju-SE"
-        },
-        {
-          "name": "Branca",
-          "from": "Cedro-CE",
-          "to": "Aracaju-SE"
+          "to": "Aracaju-SE",
+          "seats": 3
         }
       ],
       "_ui_prefix": ""
